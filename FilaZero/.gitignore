@@ -19,9 +19,9 @@
 *.tar.gz
 *.rar
 *.metadata
-*RemoteSystemsTempFiles/.project
+*.RemoteSystemsTempFiles/
 *.settings
-*bin/
+*.bin/
 *.classpath
 *.project
 *.recommenders/
