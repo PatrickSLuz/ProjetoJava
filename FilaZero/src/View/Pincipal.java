@@ -67,7 +67,9 @@ public class Pincipal {
 		
 		System.out.println("INFORME SEU TELEFONE: ");
 		String telefone = ler.next();
+		
 		System.out.println("INFORME SEU ENDEREÇO: ");
+		
 		
 	}
 	
