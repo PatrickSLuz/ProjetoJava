@@ -49,24 +49,25 @@ public class Pincipal {
 		
 	
 	public static void menuCliente() {
-		System.out.println("\n=== MENU CLIENTE ===");
-		System.out.println("1 - Cadastro cliente.");
-		System.out.println("2 - Login.");
-		System.out.println("0 - Voltar.");
-		System.out.print("Opção: ");
-		int opcao = ler.nextInt();
-		
-		if (opcao ==1) {
-			cadCliente();
+		int opcao = -1;
+		while(opcao != 0) {
+			System.out.println("\n=== MENU CLIENTE ===");
+			System.out.println("1 - Cadastro cliente.");
+			System.out.println("2 - Login.");
+			System.out.println("0 - Voltar.");
+			System.out.print("Opção: ");
+			opcao = ler.nextInt();
+			
+			if (opcao ==1) {
+				cadCliente();
+			} else if (opcao == 2) {
+				if(loginCliente()) {
+					opcao = 0;
+				}
+			} else if (opcao!=0) {
+				System.out.println("\nOpção Inválida!\n");
+			}
 		}
-		else if (opcao == 2) {
-			loginCliente();
-		}
-		
-		else if (opcao!=0) {
-			System.out.println("\nOpção Inválida!\n");
-		}
-		
 	
 	}
 	
@@ -80,18 +81,18 @@ public class Pincipal {
 		String nome = ler.next();
 		cliente.setNome(nome);
 		System.out.print("Informe o seu RG: ");
-		int rg = ler.nextInt();
+		long rg = ler.nextLong();
 		cliente.setRg(rg);
 		System.out.print("Informe o seu CPF: ");
-		int cpf = ler.nextInt();
+		long cpf = ler.nextLong();
 		cliente.setCpf(cpf);
 		System.out.print("Informe o telefone: ");
 		String telefone = ler.next();
 		cliente.setTelefone(telefone);
-		System.out.print("Informe o nome da sua rua: ");
+		System.out.print("Informe a sua rua: ");
 		String rua = ler.next();
 		endereco.setRua(rua);
-		System.out.print("Informe o Nº: ");
+		System.out.print("Informe o Nº da casa: ");
 		int num = ler.nextInt();
 		endereco.setNum(num);
 		System.out.print("Informe o bairro: ");
@@ -108,21 +109,22 @@ public class Pincipal {
 		controllerCliente.cadCliente(cliente);
 	}
 	
-	public static void loginCliente() {
-		
+	public static boolean loginCliente() {
+		boolean logado = false;
 		System.out.println("\n=== LOGIN CLIENTE ===");
 		System.out.print("Login: ");
 		String login = ler.next();
-		
+			
 		System.out.print("Senha: ");
 		String senha = ler.next();
-		
-		if(controllerCliente.autenticarCliente(login, senha)==null) {
-			System.out.println("Login ou senha incorretos!");
+		Cliente clienteLogado = controllerCliente.autenticarCliente(login, senha); 
+		if(clienteLogado == null) {
+			System.out.println("\nLogin ou senha Incorreto!");
+		} else {
+			System.out.println("\nLogado com sucesso!");
+			logado = true;
 		}
-		else {
-			System.out.println("Logado com sucesso!!");
-		}
+		return logado;
 	}
 	
 	public static void login(String setor, String entrar) {
@@ -134,10 +136,10 @@ public class Pincipal {
 		System.out.print("Senha: ");
 		String senha = ler.next();
 		
-		if(login == entrar && senha == entrar) {
-			System.out.println("\n"+setor+ "Logado com sucesso!");
+		if(login.equals(entrar) && senha.equals(entrar)) {
+			System.out.println("\n"+setor+ " Logado com Sucesso!");
 		}else {
-			System.out.println("\n"+setor+" - Login ou senha errados!");
+			System.out.println("\n"+setor+" - Login ou Senha Incorreto!");
 		}
 		
 	}
