@@ -8,7 +8,7 @@ import Controller.ControllerCliente;
 import Model.Cardapio;
 import Model.Cliente;
 import Model.Endereco;
-
+import Controller.ControllerRestaurante;
 public class Pincipal {
 	
 	static Scanner ler = new Scanner(System.in);
@@ -17,7 +17,11 @@ public class Pincipal {
 	
 	static Cliente cliente;
 	static Endereco endereco;
+<<<<<<< HEAD
 	static Cardapio cardapio = new Cardapio();
+=======
+	static ControllerRestaurante controllerRestaurante = new ControllerRestaurante();
+>>>>>>> 1b12d21bdbf2978676f16bdea4e4e08ff597c470
 	
 	public static void main(String[] args) {
 		
@@ -225,7 +229,16 @@ public class Pincipal {
 	}
 	
 	public static void fazerPedido() {
+<<<<<<< HEAD
 		System.out.println("\n=== CARDÁPIO ===\n"+controllerCardapio.exibirCardapio(cardapio));
+=======
+		int pedido = -1;
+		int prato = 0;
+		int quant = 0;
+		
+		System.out.println("**Escolha um restaurante: ");
+		pedido = ler.nextInt();
+>>>>>>> 1b12d21bdbf2978676f16bdea4e4e08ff597c470
 		
 		System.out.print("Digite o numero do Prato ou da Bebida: ");
 		int idPratoBebida = -1;
@@ -237,6 +250,13 @@ public class Pincipal {
 		
 	}
 	
+<<<<<<< HEAD
+=======
+	public static void ultimoPedido() {
+		
+	}
+	
+>>>>>>> 1b12d21bdbf2978676f16bdea4e4e08ff597c470
 }
 
 
