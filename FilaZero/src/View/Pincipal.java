@@ -5,13 +5,14 @@ import java.util.Scanner;
 import Controller.ControllerCliente;
 import Model.Cliente;
 import Model.Endereco;
-
+import Controller.ControllerRestaurante;
 public class Pincipal {
 	
 	static Scanner ler = new Scanner(System.in);
 	static ControllerCliente controllerCliente = new ControllerCliente();
 	static Cliente cliente;
 	static Endereco endereco;
+	static ControllerRestaurante controllerRestaurante = new ControllerRestaurante();
 	
 	public static void main(String[] args) {
 
@@ -206,6 +207,7 @@ public class Pincipal {
 		int pedido = -1;
 		int prato = 0;
 		int quant = 0;
+		
 		System.out.println("**Escolha um restaurante: ");
 		pedido = ler.nextInt();
 		
@@ -222,7 +224,9 @@ public class Pincipal {
 		float pagar = ler.nextFloat();
 	}
 	
-	
+	public static void ultimoPedido() {
+		
+	}
 	
 }
 
