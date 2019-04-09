@@ -1,8 +1,11 @@
 package View;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Controller.ControllerCardapio;
 import Controller.ControllerCliente;
+import Model.Cardapio;
 import Model.Cliente;
 import Model.Endereco;
 
@@ -10,13 +13,32 @@ public class Pincipal {
 	
 	static Scanner ler = new Scanner(System.in);
 	static ControllerCliente controllerCliente = new ControllerCliente();
+	static ControllerCardapio controllerCardapio = new ControllerCardapio();
+	
 	static Cliente cliente;
 	static Endereco endereco;
+	static Cardapio cardapio = new Cardapio();
 	
 	public static void main(String[] args) {
-
+		
+		controllerCardapio.cadCardapio(cardapio);
 		menu();
 
+	}
+	
+	
+	public static int tratamentoExceptionLerInt(int varLeitura, String msgPedirInfo) {
+		
+			while (varLeitura < 0) {
+				ler = new Scanner(System.in);
+				System.out.print(msgPedirInfo);
+				try {
+					varLeitura = ler.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Digite somente numeros.");
+				}
+			}
+		return varLeitura;
 	}
 	
 	public static void menu() {
@@ -27,8 +49,7 @@ public class Pincipal {
 			System.out.println("2 - Administrador.");
 			System.out.println("3 - Cozinha.");
 			System.out.println("0 - Sair.");
-			System.out.print("Opção: ");
-			op = ler.nextInt();
+			op = tratamentoExceptionLerInt(op, "Opção: ");
 			switch (op) {
 			case 1:
 				menuCliente();
@@ -58,7 +79,6 @@ public class Pincipal {
 		while(opcao != 0) {
 			System.out.println("\n=== MENU CLIENTE ===");
 			System.out.println("1 - Cadastro cliente.");
-			System.out.println("2 - Editar dados.");
 			System.out.println("3 - Login.");
 			System.out.println("0 - Voltar.");
 			System.out.print("Opção: ");
@@ -153,6 +173,7 @@ public class Pincipal {
 		} else {
 			System.out.println("\nLogado com sucesso!");
 			logado = true;
+			clienteLogado();
 		}
 		return logado;
 	}
@@ -177,11 +198,12 @@ public class Pincipal {
 	public static void clienteLogado() {
 		int escolha = -1;
 		do {
-		System.out.println("***ÁREA DO CLIENTE***");
-		System.out.println("1 - Fazer pedido: ");
-		System.out.println("2 - Repetir ultimo pedido: ");
-		System.out.println("3 - Alterar dados: ");
-		System.out.println("0 - Sair: ");
+		System.out.println("\n=== ÁREA DO CLIENTE ===");
+		System.out.println("1 - Fazer pedido");
+		System.out.println("2 - Repetir ultimo pedido");
+		System.out.println("3 - Alterar dados");
+		System.out.println("0 - Voltar para o Menu");
+		System.out.print("Opção: ");
 		escolha = ler.nextInt();
 		switch (escolha) {
 		case 1:
@@ -189,7 +211,7 @@ public class Pincipal {
 			break;
 			
 		case 2:
-			ultimoPedido();
+		//	ultimoPedido();
 			break;
 			
 		case 3:
@@ -203,26 +225,17 @@ public class Pincipal {
 	}
 	
 	public static void fazerPedido() {
-		int pedido = -1;
-		int prato = 0;
-		int quant = 0;
-		System.out.println("**Escolha um restaurante: ");
-		pedido = ler.nextInt();
+		System.out.println("\n=== CARDÁPIO ===\n"+controllerCardapio.exibirCardapio(cardapio));
 		
+		System.out.print("Digite o numero do Prato ou da Bebida: ");
+		int idPratoBebida = -1;
 		
-		System.out.println("Selecione o prato: ");
-		prato = ler.nextInt();
+		tratamentoExceptionLerInt(idPratoBebida, "Digite o numero do Prato ou da Bebida: ");
 		
-		System.out.println("Informe a quantidade: ");
-		quant = ler.nextInt();
+		System.out.print("Informe a quantidade: ");
+		int qnt = ler.nextInt();
 		
-		System.out.println("O preço do seu pedido foi de: ");
-		
-		System.out.println("Insira o valor a ser pago: ");
-		float pagar = ler.nextFloat();
 	}
-	
-	
 	
 }
 
