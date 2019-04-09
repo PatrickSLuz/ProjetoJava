@@ -7,10 +7,12 @@ import Model.Cliente;
 import Model.Endereco;
 
 public class Pincipal {
+	
 	static Scanner ler = new Scanner(System.in);
 	static ControllerCliente controllerCliente = new ControllerCliente();
 	static Cliente cliente;
 	static Endereco endereco;
+	
 	public static void main(String[] args) {
 
 		menu();
@@ -23,7 +25,7 @@ public class Pincipal {
 			System.out.println("\n=== MENU ===");
 			System.out.println("1 - Cliente.");
 			System.out.println("2 - Administrador.");
-			System.out.println("3 - Restaurante.");
+			System.out.println("3 - Cozinha.");
 			System.out.println("0 - Sair.");
 			System.out.print("Opção: ");
 			op = ler.nextInt();
@@ -47,24 +49,28 @@ public class Pincipal {
 		} while(op!=0);
 	}
 		
+	public static void cadRestaurante() {
+		
+	}
 	
 	public static void menuCliente() {
 		int opcao = -1;
 		while(opcao != 0) {
 			System.out.println("\n=== MENU CLIENTE ===");
 			System.out.println("1 - Cadastro cliente.");
-			System.out.println("2 - Login.");
+			System.out.println("2 - Editar dados.");
+			System.out.println("3 - Login.");
 			System.out.println("0 - Voltar.");
 			System.out.print("Opção: ");
 			opcao = ler.nextInt();
 			
-			if (opcao ==1) {
+			if (opcao == 1) {
 				cadCliente();
-			} else if (opcao == 2) {
+			}else if (opcao == 3) {
 				if(loginCliente()) {
 					opcao = 0;
 				}
-			} else if (opcao!=0) {
+			} else if (opcao != 0) {
 				System.out.println("\nOpção Inválida!\n");
 			}
 		}
@@ -105,6 +111,30 @@ public class Pincipal {
 		System.out.print("Informe a senha: ");
 		String senha = ler.next();
 		cliente.setSenha(senha);
+		
+		controllerCliente.cadCliente(cliente);
+	}
+	
+	public static void editarDadosCliente() {
+		cliente = new Cliente();
+		endereco = new Endereco();
+		
+		System.out.println("\n=== EDITAR CLIENTE ===");
+		System.out.print("Informe o telefone: ");
+		cliente.setTelefone(ler.next());
+		System.out.print("Informe a sua rua: ");
+		endereco.setRua(ler.next());
+		System.out.print("Informe o Nº da casa: ");
+		endereco.setNum(ler.nextInt());
+		System.out.print("Informe o bairro: ");
+		endereco.setBairro(ler.next());
+		
+		cliente.setEndereco(endereco);
+		
+		System.out.print("Informe o login: ");
+		cliente.setLogin(ler.next());
+		System.out.print("Informe a senha: ");
+		cliente.setSenha(ler.next());
 		
 		controllerCliente.cadCliente(cliente);
 	}
