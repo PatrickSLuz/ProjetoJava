@@ -144,6 +144,56 @@ public class Pincipal {
 		
 	}
 	
+	public static void clienteLogado() {
+		int escolha = -1;
+		do {
+		System.out.println("***ÁREA DO CLIENTE***");
+		System.out.println("1 - Fazer pedido: ");
+		System.out.println("2 - Repetir ultimo pedido: ");
+		System.out.println("3 - Alterar dados: ");
+		System.out.println("0 - Sair: ");
+		escolha = ler.nextInt();
+		switch (escolha) {
+		case 1:
+			fazerPedido();
+			break;
+			
+		case 2:
+			ultimoPedido();
+			break;
+			
+		case 3:
+			editarDadosCliente();
+			break;
+		default:
+			break;
+		}
+		}while(escolha!=0);
+		
+	}
+	
+	public static void fazerPedido() {
+		int pedido = -1;
+		int prato = 0;
+		int quant = 0;
+		System.out.println("**Escolha um restaurante: ");
+		pedido = ler.nextInt();
+		
+		
+		System.out.println("Selecione o prato: ");
+		prato = ler.nextInt();
+		
+		System.out.println("Informe a quantidade: ");
+		quant = ler.nextInt();
+		
+		System.out.println("O preço do seu pedido foi de: ");
+		
+		System.out.println("Insira o valor a ser pago: ");
+		float pagar = ler.nextFloat();
+	}
+	
+	
+	
 }
 
 
