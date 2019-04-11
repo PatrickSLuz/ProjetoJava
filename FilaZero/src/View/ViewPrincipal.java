@@ -3,9 +3,9 @@ package View;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Controller.ControllerCardapio;
+import Controller.ControllerProduto;
 import Controller.ControllerCliente;
-import Model.Cardapio;
+import Model.Produto;
 import Model.Cliente;
 import Model.Endereco;
 
@@ -46,8 +46,6 @@ public class ViewPrincipal {
 			System.out.println("2 - Administrador.");
 			System.out.println("3 - Cozinha.");
 			System.out.println("0 - Sair.");
-			//System.out.print("Opção: ");
-			//op = ler.nextInt();
 			op = tratamentoExceptionLerInt(op, "Opção: ");
 			switch (op) {
 			case 1:

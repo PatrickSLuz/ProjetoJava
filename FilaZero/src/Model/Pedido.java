@@ -1,34 +1,41 @@
 package Model;
 
+import java.util.List;
+
 public class Pedido {
-	private String nomeDoPrato,nomeDaBebida;
-	private int precoPrato, precoBebida, dia, mes, ano, senha;
-
-	public String getNomeDoPrato() {
-		return nomeDoPrato;
-	}
-
-	public void setNomeDoPrato(String nomeDoPrato) {
-		this.nomeDoPrato = nomeDoPrato;
-	}
-
-	public String getNomeDaBebida() {
-		return nomeDaBebida;
-	}
-
-	public void setNomeDaBebida(String nomeDaBebida) {
-		this.nomeDaBebida = nomeDaBebida;
-	}
-
-	public int getPrecoPrato() {
-		return precoPrato;
-	}
-
-	public void setPrecoPrato(int precoPrato) {
-		this.precoPrato = precoPrato;
-	}
-
+	private List<Produto> produtos;
+	private char status;
+	private int dia, mes, ano, senha;
+	private double vlr_total;
 	
+	public Pedido() {
+		
+	}
+	
+	public double getVlr_total() {
+		return vlr_total;
+	}
+
+	public void setVlr_total(double vlr_total) {
+		this.vlr_total = vlr_total;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	
+	public char getStatus() {
+		return status;
+	}
+	
+	public void setStatus(char status) {
+		this.status = status;
+	}
+
 	public int getDia() {
 		return dia;
 	}
@@ -60,18 +67,10 @@ public class Pedido {
 	public void setSenha(int senha) {
 		this.senha = senha;
 	}
-	
-
-	public int getPrecoBebida() {
-		return precoBebida;
-	}
-
-	public void setPrecoBebida(int precoBebida) {
-		this.precoBebida = precoBebida;
-	}
 
 	public String toString() {
-		return "\nNome do prato:"+this.nomeDoPrato+"\n Preço do prato: "+this.precoPrato+"\nBebida"+this.nomeDaBebida+"\nPreço da bebida: "+this.precoBebida+"\n Data: "+this.dia+this.mes+this.ano+"\nSenha:"+this.senha;
+		return "\nData: "+this.dia+"/"+this.mes+"/"+this.ano+
+				"\nSenha:"+this.senha;
 	}
 }
 
