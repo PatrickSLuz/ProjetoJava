@@ -115,12 +115,12 @@ public class ViewCliente {
 		} else {
 			System.out.println("\nLogado com sucesso!");
 			logado = true;
-			clienteLogado();
+			clienteLogado(clienteLogado);
 		}
 		return logado;
 	}
 	
-	public static void clienteLogado() {
+	public static void clienteLogado(Cliente cliente_logado) {
 		int escolha = -1;
 		do {
 			escolha = -1;
@@ -132,13 +132,15 @@ public class ViewCliente {
 			escolha = viewPrincipal.tratamentoExceptionLerInt(escolha, "Opção: ");
 			switch (escolha) {
 			case 1:
-				viewPedido.fazerPedido();
+				viewPedido.fazerPedido(cliente_logado);
 				break;
 			case 2:
 				viewPedido.ultimoPedido();
 				break;
 			case 3:
 				editarDadosCliente();
+				break;
+			case 0:
 				break;
 			default:
 				System.out.println("\nOpção Inválida!\n");

@@ -1,11 +1,13 @@
 package View;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import Controller.ControllerProduto;
 import Model.Produto;
+import Model.Cliente;
 import Model.Pedido;
 
 public class ViewPedido {
@@ -18,6 +20,12 @@ public class ViewPedido {
 	static Pedido pedido;
 	
 	static ViewPrincipal viewPrincipal = new ViewPrincipal();
+	
+	private static String pegarDataAtual() {
+	    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	    Date date = new Date();
+	    return dateFormat.format(date);
+	}
 	
 	public static void alimentaCardapio() {
 		produto = new Produto(1, "Salada Caesar", 9.9);
@@ -51,11 +59,26 @@ public class ViewPedido {
 		controllerProduto.cadCardapio(produto);
 	}
 	
-	public static void fazerPedido() {
+	public static double exibirProdutosPedido(Pedido pedido) {
+		int qnt;
+		double preco_uni, preco_fin = 0;
+		for(int i = 0; i < pedido.getProdutos().size(); i++) {
+			qnt = pedido.getProdutos().get(i).getQnt();
+			preco_uni = pedido.getProdutos().get(i).getPreco();
+			preco_fin += qnt * preco_uni;
+			System.out.println("\nNome: "+pedido.getProdutos().get(i).getPratoBebida());
+			System.out.println("Quantidade: "+qnt);
+			System.out.println("Preço Uni: "+preco_uni);
+			System.out.println("Preço: "+preco_uni * qnt);
+		}
+		return preco_fin;
+	}
+	
+	public static void fazerPedido(Cliente cliente_logado) {
 		int comprarMais = -1;
 		double vlr_total = 0;
+		pedido = new Pedido();
 		while(comprarMais < 0 || comprarMais >= 1) {
-			pedido = new Pedido();
 			comprarMais = -1;
 			System.out.println("\n=== CARDÁPIO ===\n"+controllerProduto.exibirCardapio(produto));
 			int retornoPedido = -1;
@@ -68,25 +91,21 @@ public class ViewPedido {
 			System.out.print("Informe a quantidade: ");
 			int qnt = ler.nextInt();
 			
-			pedido.setProdutos(controllerProduto.procuraPratoPeloId(retornoPedido, qnt));
-			//vlr_total = pedido.getProdutos().get(retornoPedido-1).getPreco();
+			pedido.setProdutos(controllerProduto.criaListaComPratoSelecionado(retornoPedido, qnt));
 			
 			System.out.println("\nDeseja comprar mais um Prato ou Bedida?");
 			System.out.println("0 - Não.");
 			System.out.println("1 - Sim.");
 			comprarMais = viewPrincipal.tratamentoExceptionLerInt(comprarMais, "Opção: ");
 			if(comprarMais == 0) {
-				pedido.setDia(11);
-				pedido.setMes(04);
-				pedido.setAno(2019);
+				pedido.setData(pegarDataAtual());
 				pedido.setVlr_total(vlr_total);
-				pedido.setSenha(123);
+				pedido.setSenha("123");
 				pedido.setStatus('A');
+				pedido.setCliente(cliente_logado);
 			
-				System.out.println("Produtos: "+pedido.getProdutos());
-				
-				System.out.println("Valor Total: "+pedido.getVlr_total());
-			
+				vlr_total = exibirProdutosPedido(pedido);
+				System.out.println("\nValor Total: "+vlr_total);
 			}
 		}
 	}

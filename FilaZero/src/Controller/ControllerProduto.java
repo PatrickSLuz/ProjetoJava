@@ -10,6 +10,7 @@ public class ControllerProduto {
 	
 	List<Pedido> listPedidoComidas = new ArrayList<Pedido>();
 	List<Produto> listProdutos = new ArrayList<Produto>();
+	List<Produto> list_produto_encontrado = new ArrayList<Produto>();
 	
 	public void cadCardapio(Produto cardapio) {
 		listProdutos.add(cardapio);
@@ -19,8 +20,7 @@ public class ControllerProduto {
 		return listProdutos;
 	}
 	
-	public List<Produto> procuraPratoPeloId(int id, int qnt) {
-		List<Produto> list_produto_encontrado = new ArrayList<Produto>(); 
+	public List<Produto> criaListaComPratoSelecionado(int id, int qnt) {
 		for (int x = 0; x < listProdutos.size(); x++) {
 			if (listProdutos.get(x).getId() == id) {
 				listProdutos.get(x).setQnt(qnt);

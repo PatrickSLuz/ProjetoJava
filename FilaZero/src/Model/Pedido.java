@@ -5,13 +5,31 @@ import java.util.List;
 public class Pedido {
 	private List<Produto> produtos;
 	private char status;
-	private int dia, mes, ano, senha;
+	private String senha;
+	private String data;
 	private double vlr_total;
+	private Cliente cliente;
 	
 	public Pedido() {
 		
 	}
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public double getVlr_total() {
 		return vlr_total;
 	}
@@ -36,40 +54,16 @@ public class Pedido {
 		this.status = status;
 	}
 
-	public int getDia() {
-		return dia;
-	}
-
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
-
-	public int getMes() {
-		return mes;
-	}
-
-	public void setMes(int mes) {
-		this.mes = mes;
-	}
-
-	public int getAno() {
-		return ano;
-	}
-
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(int senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
 	public String toString() {
-		return "\nData: "+this.dia+"/"+this.mes+"/"+this.ano+
+		return "\nData: "+this.data+
 				"\nSenha:"+this.senha;
 	}
 }
