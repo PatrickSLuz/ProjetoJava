@@ -2,30 +2,30 @@ package View;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import Controller.ControllerPedido;
 import Controller.ControllerProduto;
-import Model.Produto;
 import Model.Cliente;
 import Model.Pedido;
+import Model.Produto;
 
 public class ViewPedido {
 
 	static Scanner ler = new Scanner(System.in);
 	
 	static ControllerProduto controllerProduto = new ControllerProduto();
+	static ControllerPedido controllerPedido = new ControllerPedido();
 	
 	static Produto produto = new Produto();
 	static Pedido pedido;
 	
 	static ViewPrincipal viewPrincipal = new ViewPrincipal();
 	
-	private static String pegarDataAtual() {
-	    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	    Date date = new Date();
-	    return dateFormat.format(date);
-	}
+	
 	
 	public static void alimentaCardapio() {
 		produto = new Produto(1, "Salada Caesar", 9.9);
@@ -91,24 +91,72 @@ public class ViewPedido {
 			System.out.print("Informe a quantidade: ");
 			int qnt = ler.nextInt();
 			
-			pedido.setProdutos(controllerProduto.criaListaComPratoSelecionado(retornoPedido, qnt));
-			
 			System.out.println("\nDeseja comprar mais um Prato ou Bedida?");
 			System.out.println("0 - Não.");
 			System.out.println("1 - Sim.");
 			comprarMais = viewPrincipal.tratamentoExceptionLerInt(comprarMais, "Opção: ");
 			if(comprarMais == 0) {
-				pedido.setData(pegarDataAtual());
+				
+				// VERIFICAR o VALOR da VENDA
+				pedido.setProdutos(controllerPedido.criaListaComPratoSelecionado(retornoPedido, qnt));
+				pedido.setData(controllerPedido.pegarDataAtual());
 				pedido.setVlr_total(vlr_total);
 				pedido.setSenha("123");
 				pedido.setStatus('A');
 				pedido.setCliente(cliente_logado);
-			
 				vlr_total = exibirProdutosPedido(pedido);
-				System.out.println("\nValor Total: "+vlr_total);
+				controllerPedido.registraPedido(pedido);
+				if(pagamentoPedido(vlr_total)) {
+					System.out.println("\nPedido Finalizado!");
+					System.out.println("Sua senha é: "+pedido.getSenha());
+				}else {
+					controllerPedido.cancelarPedido(pedido);
+					System.out.println("\nPedido Cancelado!");
+				}
 			}
 		}
 	}
+	
+	public static int selecionarFormaPagamento() {
+		int op = -1;
+		System.out.println("\nSelecione a forma de Pagamento:");
+		System.out.println("1 - Cartão.");
+		System.out.println("2 - Dinheiro.");
+		System.out.println("0 - Desistir do Pedido.");
+		op = viewPrincipal.tratamentoExceptionLerInt(op, "Opção: ");
+		return op;
+	}
+	
+	public static boolean pagamentoPedido(double valor_total){
+		boolean compraFinalizada = false;
+		
+		System.out.println("\nO valor Total a ser Pago é: R$ "+valor_total);
+		switch(selecionarFormaPagamento()) {
+		case 1:
+			
+			break;
+		case 2:
+			double troco = 0;
+			System.out.print("Insira o valor a ser pago: ");
+			double valor_pago = ler.nextDouble();
+			troco = controllerPedido.calcTroco(valor_total, valor_pago);
+			if(troco < 0) {
+				System.out.println("\nEstá faltando: R$ "+ troco);
+				selecionarFormaPagamento();// caso o valor digitado não atinga o valor a ser pago, pedir as informações de pagamento novamente.
+			}else if(troco >= 0) {
+				System.out.println("Troco: R$ "+troco);
+				compraFinalizada = true;
+			}
+			break;
+		case 0:
+			break;
+		default:
+			System.out.println("\nOpção Inválida!\n");
+			break;
+		}
+		return compraFinalizada;
+	}
+	
 	
 	public static void ultimoPedido() {
 		
