@@ -29,4 +29,8 @@ public class Endereco {
 		this.num = num;
 	}
 	
+	public String toString() {
+		return "\n Rua: "+this.rua+"\n Bairro: "+this.bairro+"\n Numero: "+this.num;
+	}
+	
 }

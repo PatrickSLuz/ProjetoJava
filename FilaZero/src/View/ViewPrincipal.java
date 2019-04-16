@@ -8,7 +8,7 @@ import Controller.ControllerCliente;
 import Model.Produto;
 import Model.Cliente;
 import Model.Endereco;
-
+import Model.Pedido;
 public class ViewPrincipal {
 	
 	static Scanner ler = new Scanner(System.in);
@@ -79,9 +79,14 @@ public class ViewPrincipal {
 		
 		if(login.equals(entrar) && senha.equals(entrar)) {
 			System.out.println("\n"+setor+ " Logado com Sucesso!");
+			if(setor.equals("ADM")) {
+				System.out.print("Status do pedido: "+);
+			}
 		}else {
 			System.out.println("\n"+setor+" - Login ou Senha Incorreto!");
 		}
+		
+		
 		
 	}
 	

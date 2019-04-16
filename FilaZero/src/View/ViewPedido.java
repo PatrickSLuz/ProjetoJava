@@ -49,7 +49,7 @@ public class ViewPedido {
 		produto = new Produto(7, "Torre de Chop 2,5L", 60);
 		controllerProduto.cadCardapio(produto);
 		
-		produto = new Produto(8, "Agua", 3);
+		produto = new Produto(8, "Água", 3);
 		controllerProduto.cadCardapio(produto);
 		
 		produto = new Produto(9, "Suco Natural", 5);

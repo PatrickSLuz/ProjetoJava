@@ -48,10 +48,10 @@ public class ViewCliente {
 		String nome = ler.next();
 		cliente.setNome(nome);
 		System.out.print("Informe o seu RG: ");
-		long rg = ler.nextLong();
+		String rg = ler.next();
 		cliente.setRg(rg);
 		System.out.print("Informe o seu CPF: ");
-		long cpf = ler.nextLong();
+		String cpf = ler.next();
 		cliente.setCpf(cpf);
 		System.out.print("Informe o telefone: ");
 		String telefone = ler.next();
@@ -76,13 +76,12 @@ public class ViewCliente {
 		controllerCliente.cadCliente(cliente);
 	}
 	
-	public static void editarDadosCliente() {
-		cliente = new Cliente();
+	public static void editarDadosCliente(Cliente cliente_logado) {
 		endereco = new Endereco();
 		
 		System.out.println("\n=== EDITAR CLIENTE ===");
 		System.out.print("Informe o telefone: ");
-		cliente.setTelefone(ler.next());
+		cliente_logado.setTelefone(ler.next());
 		System.out.print("Informe a sua rua: ");
 		endereco.setRua(ler.next());
 		System.out.print("Informe o Nº da casa: ");
@@ -90,14 +89,12 @@ public class ViewCliente {
 		System.out.print("Informe o bairro: ");
 		endereco.setBairro(ler.next());
 		
-		cliente.setEndereco(endereco);
+		cliente_logado.setEndereco(endereco);
 		
-		System.out.print("Informe o login: ");
-		cliente.setLogin(ler.next());
 		System.out.print("Informe a senha: ");
-		cliente.setSenha(ler.next());
+		cliente_logado.setSenha(ler.next());
 		
-		controllerCliente.cadCliente(cliente);
+		controllerCliente.alteraDadosCliente(cliente_logado, cliente_logado.getCpf());
 	}
 	
 	public static boolean loginCliente() {
@@ -128,6 +125,7 @@ public class ViewCliente {
 			System.out.println("1 - Fazer pedido.");
 			System.out.println("2 - Repetir ultimo pedido.");
 			System.out.println("3 - Alterar dados.");
+			System.out.println("4 - Ver meus dados");
 			System.out.println("0 - Voltar para o Menu.");
 			escolha = viewPrincipal.tratamentoExceptionLerInt(escolha, "Opção: ");
 			switch (escolha) {
@@ -138,7 +136,10 @@ public class ViewCliente {
 				viewPedido.ultimoPedido();
 				break;
 			case 3:
-				editarDadosCliente();
+				editarDadosCliente(cliente_logado);
+				break;
+			case 4:
+				System.out.println(cliente_logado);
 				break;
 			case 0:
 				break;

@@ -3,8 +3,8 @@ package Model;
 public class Cliente {
 
 	private String nome;
-	private long rg;
-	private long cpf;
+	private String rg;
+	private String cpf;
 	private Endereco endereco;
 	private String telefone;
 	private String login;
@@ -20,16 +20,16 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public long getRg() {
+	public String getRg() {
 		return rg;
 	}
-	public void setRg(long rg) {
+	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public Endereco getEndereco() {
@@ -55,6 +55,10 @@ public class Cliente {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}	
+	}
+	
+	public String toString() {
+		return "\nNome: "+this.nome+"\nRG: "+this.rg+"\nCPF: " +this.cpf+"\n Endereço: "+this.endereco+"\n Telefone: "+this.telefone+"\n Login: "+this.login+"\n Senha"+this.senha;
+	}
 	
 }
