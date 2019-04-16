@@ -29,6 +29,17 @@ public class ControllerPedido {
 		listPedido.add(pedido);
 	}
 	
+	public List<Pedido> pegarPedidosStatus(String status) {
+		List<Pedido> listPedidoStatus = new ArrayList<Pedido>();
+		
+		for(int i = 0;i < listPedido.size(); i++) {
+			if(listPedido.get(i).getStatus().equals(status)) {
+				listPedidoStatus.add(listPedido.get(i));
+			}
+		}
+		return listPedidoStatus;
+	}
+	
 	public List<Produto> criaListaComPratoSelecionado(int id, int qnt) {
 		for (int x = 0; x < listProdutos.size(); x++) {
 			if (listProdutos.get(x).getId() == id) {
@@ -56,5 +67,7 @@ public class ControllerPedido {
 		}
 		return troco;
 	}
+	
+	
 	
 }

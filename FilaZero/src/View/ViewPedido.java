@@ -102,7 +102,7 @@ public class ViewPedido {
 				pedido.setData(controllerPedido.pegarDataAtual());
 				pedido.setVlr_total(vlr_total);
 				pedido.setSenha("123");
-				pedido.setStatus('A');
+				pedido.setStatus("A");
 				pedido.setCliente(cliente_logado);
 				vlr_total = exibirProdutosPedido(pedido);
 				controllerPedido.registraPedido(pedido);
@@ -160,6 +160,15 @@ public class ViewPedido {
 	
 	public static void ultimoPedido() {
 		
+	}
+	
+	public static void verificaSetor(String setor) {
+		if(setor.equals("ADM")) {
+			System.out.println(controllerPedido.pegarPedidosStatus("A"));
+		}
+		else {
+			System.out.println(controllerPedido.pegarPedidosStatus("P"));
+		}
 	}
 	
 }

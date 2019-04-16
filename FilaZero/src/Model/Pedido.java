@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Pedido {
 	private List<Produto> produtos;
-	private char status;
+	private String status;
 	private String senha;
 	private String data;
 	private double vlr_total;
@@ -46,11 +46,11 @@ public class Pedido {
 		this.produtos = produtos;
 	}
 	
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
