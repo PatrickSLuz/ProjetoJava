@@ -62,9 +62,28 @@ public class Pedido {
 		this.senha = senha;
 	}
 
+	public String verificaStatus() {
+		String status = this.status;
+		if(status.equals("A")) {
+			status = "Aberto";
+		}else if(status.equals("P")) {
+			status = "Pendente";
+		}else if(status.equals("F")) {
+			status = "Fechado";
+		}else {
+			status = "Cancelado";
+		}
+		return status;
+	}
+	
 	public String toString() {
-		return "\nData: "+this.data+
-				"\nSenha:"+this.senha;
+		return "\nStatus: "+verificaStatus()
+				+ "\nData: "+this.data
+				+ "\nCliente: "
+				+ "\n Nome: "+cliente.getNome()
+				+ "\n CPF: "+cliente.getCpf()
+				+ "\nProdutos: "+produtos.toString()
+				+ "\nSenha:"+this.senha;
 	}
 }
 

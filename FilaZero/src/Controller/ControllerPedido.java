@@ -53,10 +53,6 @@ public class ControllerPedido {
 		}
 		return listProdutosDaLista;
 	}
-	
-	public void criarPedido(Produto produtos, List<Produto> listProdutosDoPedido) {
-		listProdutosDoPedido.add(produtos);
-	}
 
 	public static double calcTroco(double valor_total, double valor_pago) {
 		double troco = 0;

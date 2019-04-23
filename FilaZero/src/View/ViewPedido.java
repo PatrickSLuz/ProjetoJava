@@ -111,11 +111,12 @@ public class ViewPedido {
 				pedido.setCliente(cliente_logado);
 				vlr_total = exibirProdutosPedidoRetornaVlr(pedido);
 				pedido.setVlr_total(vlr_total);
-				controllerPedido.registraPedido(pedido);
 				
 				if(pagamentoPedido(vlr_total)) {
 					System.out.println("\nPedido Finalizado!");
 					System.out.println("Sua senha é: "+pedido.getSenha());
+					pedido.setStatus("P");
+					controllerPedido.registraPedido(pedido);
 				}else {
 					controllerPedido.cancelarPedido(pedido);
 					System.out.println("\nPedido Cancelado!");
