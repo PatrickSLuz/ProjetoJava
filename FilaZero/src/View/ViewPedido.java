@@ -106,7 +106,7 @@ public class ViewPedido {
 			if(comprarMais == 0) {
 				
 				pedido.setData(controllerPedido.pegarDataAtual());
-				pedido.setSenha(controllerPedido.incrementaSenha(pedido));
+				pedido.setSenha(controllerPedido.incrementaSenha());
 				pedido.setStatus("A");
 				pedido.setCliente(cliente_logado);
 				vlr_total = exibirProdutosPedidoRetornaVlr(pedido);
@@ -116,11 +116,11 @@ public class ViewPedido {
 					System.out.println("\nPedido Finalizado!");
 					System.out.println("Sua senha é: "+pedido.getSenha());
 					pedido.setStatus("P");
-					controllerPedido.registraPedido(pedido);
 				}else {
-					controllerPedido.cancelarPedido(pedido);
+					pedido.setStatus("C");
 					System.out.println("\nPedido Cancelado!");
 				}
+				controllerPedido.registraPedido(pedido);
 			}else if(comprarMais != 1) {
 				System.out.println("\nOpção Inválida!\n");
 			}
@@ -160,6 +160,7 @@ public class ViewPedido {
 				}
 				break;
 			case 0:
+				compraFinalizada = false;
 				break;
 			default:
 				System.out.println("\nOpção Inválida!\n");
@@ -170,10 +171,13 @@ public class ViewPedido {
 	}
 	
 	
-	public static void ultimoPedido(List<Pedido> listPedido, Cliente cliente_logado) {
-		
-		System.out.println(listPedido.get(listPedido.size()));
-		controllerPedido.ultimoPedido();
+	public static void ultimoPedido(Cliente cliente_logado) {
+		if(controllerPedido.ultimoPedido(cliente_logado) != null) {
+			System.out.println("\nSeu ultimo pedido é:\n"
+			+ controllerPedido.ultimoPedido(cliente_logado));
+		}else {
+			System.out.println("\nVocê não fez nenhum Pedido ainda!");
+		}
 	}
 	
 	public static void verificaSetor(String setor) {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Model.Cliente;
 import Model.Pedido;
 import Model.Produto;
 
@@ -19,13 +20,8 @@ public class ControllerPedido {
 	    return dateFormat.format(date);
 	}
 	
-	public int incrementaSenha(Pedido pedido) {
-		return pedido.getSenha()+1;
-	}
-	
-	public void cancelarPedido(Pedido cancelPedido) {
-		//list_produto_encontrado.remove(cancelPedido);
-		//rever isso.
+	public int incrementaSenha() {
+		return 100 + listPedido.size();
 	}
 	
 	public void registraPedido(Pedido pedido){ 
@@ -67,8 +63,16 @@ public class ControllerPedido {
 		return troco;
 	}
 	
-	public static void ultimoPedido() {
-		
+	public Pedido ultimoPedido(Cliente cliente_logado) {
+		Pedido ult_pedido = null;
+		int tamanho_lista = listPedido.size();
+		for (int i = tamanho_lista-1; i >= 0; i--) {
+			if(listPedido.get(i).getCliente().getCpf().equals(cliente_logado.getCpf())) {
+				ult_pedido = listPedido.get(i);
+				break;
+			}
+		}
+		return ult_pedido;
 	}
 	
 	

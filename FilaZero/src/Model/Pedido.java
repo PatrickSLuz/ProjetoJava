@@ -9,7 +9,7 @@ public class Pedido {
 	private String data;
 	private double vlr_total;
 	private Cliente cliente;
-	
+	// tem que colocar a quantidade aqui.
 	public Pedido() {
 		
 	}
@@ -83,7 +83,7 @@ public class Pedido {
 				+ "\n Nome: "+cliente.getNome()
 				+ "\n CPF: "+cliente.getCpf()
 				+ "\nProdutos: "+produtos.toString()
-				+ "\nSenha:"+this.senha;
+				+ "\nSenha: "+this.senha;
 	}
 }
 
