@@ -1,10 +1,12 @@
 package View;
 
+import java.util.List;
 import java.util.Scanner;
 
 import Controller.ControllerCliente;
 import Model.Cliente;
 import Model.Endereco;
+import Model.Pedido;
 
 public class ViewCliente {
 
@@ -133,7 +135,7 @@ public class ViewCliente {
 				viewPedido.fazerPedido(cliente_logado);
 				break;
 			case 2:
-				viewPedido.ultimoPedido();
+				viewPedido.ultimoPedido(cliente_logado);
 				break;
 			case 3:
 				editarDadosCliente(cliente_logado);
