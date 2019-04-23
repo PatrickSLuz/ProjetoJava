@@ -5,7 +5,7 @@ import java.util.List;
 public class Pedido {
 	private List<Produto> produtos;
 	private String status;
-	private String senha;
+	private int senha;
 	private String data;
 	private double vlr_total;
 	private Cliente cliente;
@@ -54,11 +54,11 @@ public class Pedido {
 		this.status = status;
 	}
 
-	public String getSenha() {
+	public int getSenha() {
 		return senha;
 	}
 
-	public void setSenha(String senha) {
+	public void setSenha(int senha) {
 		this.senha = senha;
 	}
 

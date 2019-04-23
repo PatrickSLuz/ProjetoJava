@@ -20,6 +20,9 @@ public class ControllerProduto {
 		return listProdutos;
 	}
 	
+	public List<Produto> retornaProdutos() {	
+		return listProdutos;
+	}
 	
 	
 }

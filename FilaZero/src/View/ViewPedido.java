@@ -59,7 +59,7 @@ public class ViewPedido {
 		controllerProduto.cadCardapio(produto);
 	}
 	
-	public static double exibirProdutosPedido(Pedido pedido) {
+	public static double exibirProdutosPedidoRetornaVlr(Pedido pedido) {
 		int qnt;
 		double preco_uni, preco_fin = 0;
 		for(int i = 0; i < pedido.getProdutos().size(); i++) {
@@ -77,7 +77,11 @@ public class ViewPedido {
 	public static void fazerPedido(Cliente cliente_logado) {
 		int comprarMais = -1;
 		double vlr_total = 0;
+		
 		pedido = new Pedido();
+		List<Produto> listProdutos = controllerProduto.retornaProdutos();
+		List<Produto> listProdutosDaLista = new ArrayList<Produto>();
+		
 		while(comprarMais < 0 || comprarMais >= 1) {
 			comprarMais = -1;
 			System.out.println("\n=== CARDÁPIO ===\n"+controllerProduto.exibirCardapio(produto));
@@ -95,17 +99,20 @@ public class ViewPedido {
 			System.out.println("0 - Não.");
 			System.out.println("1 - Sim.");
 			comprarMais = viewPrincipal.tratamentoExceptionLerInt(comprarMais, "Opção: ");
+			
+			// setando os produtos selecionados na lista antes de perguntar se o user quer para de comprar.
+			pedido.setProdutos(controllerPedido.criaListaComPratoSelecionado(retornoPedido, qnt, listProdutos, listProdutosDaLista));
+			
 			if(comprarMais == 0) {
 				
-				// VERIFICAR o VALOR da VENDA
-				pedido.setProdutos(controllerPedido.criaListaComPratoSelecionado(retornoPedido, qnt));
 				pedido.setData(controllerPedido.pegarDataAtual());
-				pedido.setVlr_total(vlr_total);
-				pedido.setSenha("123");
+				pedido.setSenha(controllerPedido.incrementaSenha(pedido));
 				pedido.setStatus("A");
 				pedido.setCliente(cliente_logado);
-				vlr_total = exibirProdutosPedido(pedido);
+				vlr_total = exibirProdutosPedidoRetornaVlr(pedido);
+				pedido.setVlr_total(vlr_total);
 				controllerPedido.registraPedido(pedido);
+				
 				if(pagamentoPedido(vlr_total)) {
 					System.out.println("\nPedido Finalizado!");
 					System.out.println("Sua senha é: "+pedido.getSenha());
@@ -113,46 +120,50 @@ public class ViewPedido {
 					controllerPedido.cancelarPedido(pedido);
 					System.out.println("\nPedido Cancelado!");
 				}
+			}else if(comprarMais != 1) {
+				System.out.println("\nOpção Inválida!\n");
 			}
 		}
 	}
 	
-	public static int selecionarFormaPagamento() {
-		int op = -1;
-		System.out.println("\nSelecione a forma de Pagamento:");
-		System.out.println("1 - Cartão.");
-		System.out.println("2 - Dinheiro.");
-		System.out.println("0 - Desistir do Pedido.");
-		op = viewPrincipal.tratamentoExceptionLerInt(op, "Opção: ");
-		return op;
-	}
-	
 	public static boolean pagamentoPedido(double valor_total){
 		boolean compraFinalizada = false;
-		
-		System.out.println("\nO valor Total a ser Pago é: R$ "+valor_total);
-		switch(selecionarFormaPagamento()) {
-		case 1:
-			
-			break;
-		case 2:
-			double troco = 0;
-			System.out.print("Insira o valor a ser pago: ");
-			double valor_pago = ler.nextDouble();
-			troco = controllerPedido.calcTroco(valor_total, valor_pago);
-			if(troco < 0) {
-				System.out.println("\nEstá faltando: R$ "+ troco);
-				selecionarFormaPagamento();// caso o valor digitado não atinga o valor a ser pago, pedir as informações de pagamento novamente.
-			}else if(troco >= 0) {
-				System.out.println("Troco: R$ "+troco);
+		int op = -1;
+			while (op != 0) {
+			op = -1;
+			System.out.println("\nO valor Total a ser Pago é: R$ "+valor_total);
+	
+			System.out.println("\nSelecione a forma de Pagamento:");
+			System.out.println("1 - Cartão.");
+			System.out.println("2 - Dinheiro.");
+			System.out.println("0 - Desistir do Pedido.");
+			op = viewPrincipal.tratamentoExceptionLerInt(op, "Opção: ");
+	
+			switch(op) {
+			case 1:
+				op = 0;
 				compraFinalizada = true;
+				break;
+			case 2:
+				double troco = 0;
+				System.out.print("Insira o valor a ser pago: ");
+				double valor_pago = ler.nextDouble();
+				troco = controllerPedido.calcTroco(valor_total, valor_pago);
+				if(troco < 0) {
+					System.out.println("\nEstá faltando: R$ "+ troco*-1);
+					op = -1;
+				}else if(troco >= 0) {
+					System.out.println("Troco: R$ "+troco);
+					op = 0;
+					compraFinalizada = true;
+				}
+				break;
+			case 0:
+				break;
+			default:
+				System.out.println("\nOpção Inválida!\n");
+				break;
 			}
-			break;
-		case 0:
-			break;
-		default:
-			System.out.println("\nOpção Inválida!\n");
-			break;
 		}
 		return compraFinalizada;
 	}
