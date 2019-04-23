@@ -71,6 +71,20 @@ public class ControllerPedido {
 		return troco;
 	}
 	
+	public static void ultimoPedido() {
+		
+	}
+	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+

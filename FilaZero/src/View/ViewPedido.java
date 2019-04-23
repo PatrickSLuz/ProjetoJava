@@ -169,8 +169,10 @@ public class ViewPedido {
 	}
 	
 	
-	public static void ultimoPedido() {
+	public static void ultimoPedido(List<Pedido> listPedido, Cliente cliente_logado) {
 		
+		System.out.println(listPedido.get(listPedido.size()));
+		controllerPedido.ultimoPedido();
 	}
 	
 	public static void verificaSetor(String setor) {
