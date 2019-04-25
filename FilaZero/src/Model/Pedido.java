@@ -9,7 +9,7 @@ public class Pedido {
 	private String data;
 	private double vlr_total;
 	private Cliente cliente;
-	// tem que colocar a quantidade aqui.
+	
 	public Pedido() {
 		
 	}
@@ -68,8 +68,8 @@ public class Pedido {
 			status = "Aberto";
 		}else if(status.equals("P")) {
 			status = "Pendente";
-		}else if(status.equals("F")) {
-			status = "Fechado";
+		}else if(status.equals("E")) {
+			status = "Entrege";
 		}else {
 			status = "Cancelado";
 		}

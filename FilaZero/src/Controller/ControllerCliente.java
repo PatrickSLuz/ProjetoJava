@@ -14,7 +14,7 @@ public class ControllerCliente {
 	}
 	
 	public Cliente autenticarCliente(String login, String senha) {
-		Cliente logado=null;
+		Cliente logado = null;
 		for(int i =0; i < listCliente.size(); i++) {
 			if(listCliente.get(i).getLogin().equals(login) && listCliente.get(i).getSenha().equals(senha)) {
 				logado = listCliente.get(i);

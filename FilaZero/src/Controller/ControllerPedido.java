@@ -40,9 +40,12 @@ public class ControllerPedido {
 	}
 	
 	public List<Produto> criaListaComPratoSelecionado(int id, int qnt, List<Produto> listProdutos, List<Produto> listProdutosDaLista) {
+		double preco_fin;
 		for (int x = 0; x < listProdutos.size(); x++) {
 			if (listProdutos.get(x).getId() == id) {
 				listProdutos.get(x).setQnt(qnt);
+				preco_fin = qnt*listProdutos.get(x).getPrecoUni();
+				listProdutos.get(x).setPrecoFin(preco_fin);
 				listProdutosDaLista.add(listProdutos.get(x));
 				break;
 			}

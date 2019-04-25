@@ -4,17 +4,27 @@ public class Produto {
 	
 	private int id, qnt;
 	private String pratoBebida;
-	private double preco;
+	private double precoUni;
+	private double precoFin;
 	
 		
 	public Produto() {
 		
 	}
 		
-	public Produto(int id, String pratoBebida, double preco) {
+	public Produto(int id, String pratoBebida, double precoUni) {
 		this.id = id;
 		this.pratoBebida = pratoBebida;
-		this.preco = preco;
+		this.precoUni = precoUni;
+	}
+	
+	
+	public double getPrecoFin() {
+		return precoFin;
+	}
+
+	public void setPrecoFin(double precoFin) {
+		this.precoFin = precoFin;
 	}
 
 	public int getQnt() {
@@ -41,19 +51,27 @@ public class Produto {
 		this.pratoBebida = pratoBebida;
 	}
 
-	public double getPreco() {
-		return preco;
+	public double getPrecoUni() {
+		return precoUni;
 	}
 
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void getPrecoUni(double precoUni) {
+		this.precoUni = precoUni;
 	}
 
+	public String imprimeTudoProduto() {
+		return "\nPrato "+this.id+":\n"+
+				"Nome: "+this.pratoBebida+"\n"+
+				"Quantidade: "+this.qnt+"\n"+
+				"Preço Uni: R$ "+this.precoUni+"\n"+
+				"Preco Fin: R$ "+this.precoFin+"\n";
+	}
+	
 	@Override
 	public String toString() {
 		return "\nPrato "+this.id+":\n"+
 				"Nome: "+this.pratoBebida+"\n"+
-				"Preço: R$ "+this.preco+"\n";
+				"Preço Uni: R$ "+this.precoUni+"\n";
 	}
 	
 }

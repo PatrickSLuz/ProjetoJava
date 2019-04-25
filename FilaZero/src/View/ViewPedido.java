@@ -61,17 +61,18 @@ public class ViewPedido {
 	
 	public static double exibirProdutosPedidoRetornaVlr(Pedido pedido) {
 		int qnt;
-		double preco_uni, preco_fin = 0;
+		double preco_uni, preco_fin, vlr_total = 0;
 		for(int i = 0; i < pedido.getProdutos().size(); i++) {
 			qnt = pedido.getProdutos().get(i).getQnt();
-			preco_uni = pedido.getProdutos().get(i).getPreco();
-			preco_fin += qnt * preco_uni;
+			preco_uni = pedido.getProdutos().get(i).getPrecoUni();
+			preco_fin = pedido.getProdutos().get(i).getPrecoFin();
+			vlr_total += preco_fin;
 			System.out.println("\nNome: "+pedido.getProdutos().get(i).getPratoBebida());
 			System.out.println("Quantidade: "+qnt);
 			System.out.println("Preço Uni: "+preco_uni);
-			System.out.println("Preço: "+preco_uni * qnt);
+			System.out.println("Preço: "+preco_fin);
 		}
-		return preco_fin;
+		return vlr_total;
 	}
 	
 	public static void fazerPedido(Cliente cliente_logado) {
