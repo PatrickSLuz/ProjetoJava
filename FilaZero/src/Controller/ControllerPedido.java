@@ -12,6 +12,11 @@ import Model.Produto;
 
 public class ControllerPedido {
 	
+	//CRIAR STATUS DE RETIRADO, QUNADO O PEDIDO ESTIVER FINALIZADO PELA COZINHA O STATUS FICA COMO ENTREGE, 
+	//SÓ MUDA PARA RETIRADO QUANDO O CLIENTE RETIRAR O PEDIDO.
+	//CRIAR UM METODO QUNADO O CLIENTE LOGAR PARA VERIFICAR SE EXISTE ALGUM PEDIDO DELE QUE FOI FINALIZADO, PEDIR A SENHA E RETIRAR O PEDID0 
+	//E SETAR O STATUS COMO RETIRADO.
+	
 	List<Pedido> listPedido = new ArrayList<Pedido>();
 	
 	public String pegarDataAtual() {
@@ -19,6 +24,17 @@ public class ControllerPedido {
 	    Date date = new Date();
 	    return dateFormat.format(date);
 	}
+	
+	public List<Pedido> retornaPedidosConformeStatus(String status){
+		List<Pedido> listPedidoConformeStatus = new ArrayList<>();
+		for (Pedido pedido : listPedidoConformeStatus) {
+			if(pedido.getStatus().equals(status)) {
+				listPedidoConformeStatus.add(pedido);
+			}
+		}
+		return listPedidoConformeStatus;
+	}
+	
 	
 	public int incrementaSenha() {
 		return 100 + listPedido.size();
@@ -28,15 +44,8 @@ public class ControllerPedido {
 		listPedido.add(pedido);
 	}
 	
-	public List<Pedido> pegarPedidosStatus(String status) {
-		List<Pedido> listPedidoStatus = new ArrayList<Pedido>();
-		
-		for(int i = 0;i < listPedido.size(); i++) {
-			if(listPedido.get(i).getStatus().equals(status)) {
-				listPedidoStatus.add(listPedido.get(i));
-			}
-		}
-		return listPedidoStatus;
+	public List<Pedido> retornaListaPedido(){
+		return listPedido;
 	}
 	
 	public List<Produto> criaListaComPratoSelecionado(int id, int qnt, List<Produto> listProdutos, List<Produto> listProdutosDaLista) {

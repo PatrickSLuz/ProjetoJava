@@ -171,22 +171,12 @@ public class ViewPedido {
 		return compraFinalizada;
 	}
 	
-	
 	public static void ultimoPedido(Cliente cliente_logado) {
 		if(controllerPedido.ultimoPedido(cliente_logado) != null) {
 			System.out.println("\nSeu ultimo pedido é:\n"
 			+ controllerPedido.ultimoPedido(cliente_logado));
 		}else {
 			System.out.println("\nVocê não fez nenhum Pedido ainda!");
-		}
-	}
-	
-	public static void verificaSetor(String setor) {
-		if(setor.equals("ADM")) {
-			System.out.println(controllerPedido.pegarPedidosStatus("A"));
-		}
-		else {
-			System.out.println(controllerPedido.pegarPedidosStatus("P"));
 		}
 	}
 	

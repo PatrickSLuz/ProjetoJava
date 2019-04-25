@@ -79,7 +79,12 @@ public class ViewPrincipal {
 		
 		if(login.equals(entrar) && senha.equals(entrar)) {
 			System.out.println("\n"+setor+ " Logado com Sucesso!");
-			viewPedido.verificaSetor(setor);
+				if(setor.equals("ADM")) {
+					System.out.println(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+				}
+				else if (setor.equals("COZ")){
+					//viewCozinha
+				}
 		}else {
 			System.out.println("\n"+setor+" - Login ou Senha Incorreto!");
 		}
