@@ -46,8 +46,8 @@ public class ControllerCliente {
 		return validar;
 	}
 	
-	public void litarCliente() {
-		
+	public List<Cliente> listarCliente() {
+		return listCliente;
 	}
 	
 }

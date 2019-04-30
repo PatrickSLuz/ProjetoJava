@@ -162,4 +162,18 @@ public class ViewCliente {
 		
 	}
 	
+	public static void exibirCliente() {
+		System.out.println(controllerCliente.listarCliente());
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+

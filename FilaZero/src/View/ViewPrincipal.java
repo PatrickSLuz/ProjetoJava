@@ -3,12 +3,6 @@ package View;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Controller.ControllerProduto;
-import Controller.ControllerCliente;
-import Model.Produto;
-import Model.Cliente;
-import Model.Endereco;
-import Model.Pedido;
 public class ViewPrincipal {
 	
 	static Scanner ler = new Scanner(System.in);
@@ -94,10 +88,11 @@ public class ViewPrincipal {
 		int op = -1;
 		while(op != 0) {
 			op = -1;
-			System.out.println("\n=== Visualizar Pedidos ===");
+			System.out.println("\n=== Visualizar Pedidos/Clientes ===");
 			System.out.println("1 - Pedidos Pendentes (Pagos).");
 			System.out.println("2 - Pedidos Retirados (Cliente retirou).");
 			System.out.println("3 - Pedidos Cancelados (Cliente desistiu antes de pagar).");
+			System.out.println("4 - Listar clientes.");
 			System.out.println("0 - Logout ADM.");
 			op = tratamentoExceptionLerInt(op, "Opção: ");
 			switch(op) {
@@ -109,6 +104,9 @@ public class ViewPrincipal {
 				break;
 			case 3:
 				System.out.println("\nPedidos Cancelados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
+				break;
+			case 4:
+					viewCliente.exibirCliente();
 				break;
 			case 0:
 				op = 0;
