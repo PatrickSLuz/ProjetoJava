@@ -35,4 +35,19 @@ public class ControllerCliente {
 		
 	}
 	
+	public boolean validarCad(String cpf, String login) {
+		boolean validar = false;
+		
+		for (int i = 0; i < listCliente.size(); i++) {
+			if(listCliente.get(i).getCpf().equals(cpf) && listCliente.get(i).getLogin().equals(login)) {
+				validar = true;
+			}
+		}
+		return validar;
+	}
+	
+	public void litarCliente() {
+		
+	}
+	
 }

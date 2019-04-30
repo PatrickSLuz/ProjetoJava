@@ -85,10 +85,7 @@ public class ControllerPedido {
 			}
 		}
 		return ult_pedido;
-	}
-	
-	
-	
+	}	
 }
 
 

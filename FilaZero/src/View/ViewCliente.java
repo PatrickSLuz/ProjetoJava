@@ -75,7 +75,16 @@ public class ViewCliente {
 		String senha = ler.next();
 		cliente.setSenha(senha);
 		
-		controllerCliente.cadCliente(cliente);
+		if(controllerCliente.validarCad(cpf, login)) {
+			System.out.println("CPF ou Login já cadastrado");
+		}else {
+			controllerCliente.cadCliente(cliente);
+		}
+		
+		
+		
+		
+		
 	}
 	
 	public static void editarDadosCliente(Cliente cliente_logado) {
