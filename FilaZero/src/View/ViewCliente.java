@@ -81,10 +81,6 @@ public class ViewCliente {
 			controllerCliente.cadCliente(cliente);
 		}
 		
-		
-		
-		
-		
 	}
 	
 	public static void editarDadosCliente(Cliente cliente_logado) {
@@ -134,9 +130,10 @@ public class ViewCliente {
 			escolha = -1;
 			System.out.println("\n=== ÁREA DO CLIENTE ===");
 			System.out.println("1 - Fazer pedido.");
-			System.out.println("2 - Repetir ultimo pedido.");
-			System.out.println("3 - Alterar dados.");
-			System.out.println("4 - Ver meus dados");
+			System.out.println("2 - Verificar se o Pedido está Finalizado.");
+			System.out.println("3 - Repetir ultimo pedido.");
+			System.out.println("4 - Alterar dados.");
+			System.out.println("5 - Ver meus dados");
 			System.out.println("0 - Logout Cliente.");
 			escolha = viewPrincipal.tratamentoExceptionLerInt(escolha, "Opção: ");
 			switch (escolha) {
@@ -144,12 +141,22 @@ public class ViewCliente {
 				viewPedido.fazerPedido(cliente_logado);
 				break;
 			case 2:
-				viewPedido.ultimoPedido(cliente_logado);
+				System.out.println(viewPedido.procurarPedidoCliente(cliente_logado));
+				System.out.print("Digite a senha do Pedido: ");
+				int senha = ler.nextInt();
+				if(viewPedido.verificarSenhaPedido(cliente_logado, senha)) {
+					System.out.println("Senha Correta!\nPedido Retirado!");
+				}else {
+					System.out.println("Senha incorreta! Tente novamente.");
+				}
 				break;
 			case 3:
-				editarDadosCliente(cliente_logado);
+				viewPedido.ultimoPedido(cliente_logado);
 				break;
 			case 4:
+				editarDadosCliente(cliente_logado);
+				break;
+			case 5:
 				System.out.println(cliente_logado);
 				break;
 			case 0:

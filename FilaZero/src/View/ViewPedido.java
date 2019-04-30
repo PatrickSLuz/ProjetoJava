@@ -179,4 +179,16 @@ public class ViewPedido {
 		}
 	}
 	
+	public boolean verificarSenhaPedido(Cliente cliente, int senha){
+		return controllerPedido.validarSenhaPedido(cliente, senha);
+	}
+	
+	public static List<Pedido> procurarPedidoCliente(Cliente cliente) {
+		return controllerPedido.verificarPedidoParaRetirar(cliente);
+	}
+	
+	public static void attStatusPedidoCozinha(int senha) {
+		controllerPedido.attStatusFinalizacaoCozinha(senha);
+	}
+	
 }
