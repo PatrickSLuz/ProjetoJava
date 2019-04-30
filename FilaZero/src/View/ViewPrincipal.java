@@ -4,9 +4,13 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+<<<<<<< HEAD
 import Model.Cliente;
 import Model.Pedido;
 import Model.Produto;
+=======
+import Controller.ControllerPedido;
+>>>>>>> 622c794266dd2780db01d424d6963dc5be38b26c
 
 public class ViewPrincipal {
 	
@@ -81,7 +85,7 @@ public class ViewPrincipal {
 				if(setor.equals("ADM")) {
 					menuADM();
 				}
-				else if (setor.equals("COZ")){
+				else if (setor.equals("COZINHA")){
 					menuCOZ();
 				}
 		}else {
@@ -111,10 +115,11 @@ public class ViewPrincipal {
 		while(op != 0) {
 			op = -1;
 			System.out.println("\n=== Visualizar Pedidos/Clientes ===");
-			System.out.println("1 - Pedidos Pendentes (Pagos).");
-			System.out.println("2 - Pedidos Retirados (Cliente retirou).");
-			System.out.println("3 - Pedidos Cancelados (Cliente desistiu antes de pagar).");
-			System.out.println("4 - Listar clientes.");
+			System.out.println("1 - Pedidos Pendentes (Pagos pelo Cliente).");
+			System.out.println("2 - Pedidos Finalizados (Finalizado pela Cozinha).");
+			System.out.println("3 - Pedidos Retirados (Cliente retirou).");
+			System.out.println("4 - Pedidos Cancelados (Cliente desistiu antes de pagar).");
+			System.out.println("5 - Listar clientes.");
 			System.out.println("0 - Logout ADM.");
 			op = tratamentoExceptionLerInt(op, "Opção: ");
 			switch(op) {
@@ -122,6 +127,7 @@ public class ViewPrincipal {
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
 				break;
 			case 2:
+<<<<<<< HEAD
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
 				break;
 			case 3:
@@ -138,6 +144,18 @@ public class ViewPrincipal {
 						System.out.println("Login: "+cliente.getLogin());
 						System.out.println("Senha:"+cliente.getSenha());
 					}
+=======
+				System.out.println("\nPedidos Finalizados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("F"));
+				break;
+			case 3:
+				System.out.println("\nPedidos Retirados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
+				break;
+			case 4:
+				System.out.println("\nPedidos Cancelados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
+				break;
+			case 5:
+				viewCliente.exibirCliente();
+>>>>>>> 622c794266dd2780db01d424d6963dc5be38b26c
 				break;
 			case 0:
 				op = 0;
@@ -150,7 +168,11 @@ public class ViewPrincipal {
 	}
 	
 	public static void menuCOZ() {
-		System.out.println("Pedidos Pendentes:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+		System.out.println("\n=== Pedidos Pendentes ===\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+		System.out.println("\nDigite a senha do Pedido para finalizar a produção.");
+		System.out.print("Senha do Pedido: ");
+		int senha = ler.nextInt();
+		viewPedido.attStatusPedidoCozinha(senha);
 	}
 	
 }

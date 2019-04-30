@@ -35,6 +35,37 @@ public class ControllerPedido {
 		return listPedidoConformeStatus;
 	}
 	
+	public boolean validarSenhaPedido(Cliente cliente, int senha) {
+		boolean senha_correta = false;
+		for (Pedido pedido : listPedido) {
+			if(pedido.getCliente().getCpf().equals(cliente.getCpf()) && pedido.getSenha() == senha) {
+				pedido.setStatus("E");
+				senha_correta = true;
+				break;
+			}
+		}
+		return senha_correta;
+	}
+	
+	public List<Pedido> verificarPedidoParaRetirar(Cliente cliente){
+		List<Pedido> listPedidosParaRetirar = new ArrayList<>();
+		for (Pedido pedido : listPedido) {
+			if(pedido.getCliente().getCpf().equals(cliente.getCpf()) && pedido.getStatus().equals("F")) {
+				listPedidosParaRetirar.add(pedido);
+			}
+		}
+		return listPedidosParaRetirar;
+	}
+	
+	public void attStatusFinalizacaoCozinha(int senha) {
+		for (Pedido pedido : listPedido) {
+			if(pedido.getSenha() == senha) {
+				pedido.setStatus("F");
+				break;
+			}
+		}
+	}
+	
 	
 	public int incrementaSenha() {
 		return 100 + listPedido.size();

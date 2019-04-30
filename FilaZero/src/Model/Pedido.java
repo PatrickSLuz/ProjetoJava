@@ -68,6 +68,8 @@ public class Pedido {
 			status = "Pendente";
 		}else if(status.equals("E")) {
 			status = "Entrege";
+		}else if(status.equals("F")) {
+			status = "Finalizado";
 		}else {
 			status = "Cancelado";
 		}
