@@ -58,7 +58,7 @@ public class Cliente {
 	}
 	
 	public String toString() {
-		return "\nNome: "+this.nome+"\nRG: "+this.rg+"\nCPF: " +this.cpf+"\n Endereço: "+this.endereco+"\n Telefone: "+this.telefone+"\n Login: "+this.login+"\n Senha"+this.senha;
+		return "\nNome: "+this.nome+"\nRG: "+this.rg+"\nCPF: " +this.cpf+"\nEndereço: "+this.endereco+"\nTelefone: "+this.telefone+"\nLogin: "+this.login+"\nSenha: "+this.senha;
 	}
 	
 }

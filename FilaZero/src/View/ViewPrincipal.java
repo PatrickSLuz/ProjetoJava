@@ -1,7 +1,12 @@
 package View;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+
+import Model.Cliente;
+import Model.Pedido;
+import Model.Produto;
 
 public class ViewPrincipal {
 	
@@ -84,6 +89,23 @@ public class ViewPrincipal {
 		}
 	}
 	
+	public static void printarPedidoConformeStatus(List<Pedido> listPedidoStatus) {
+		for (Pedido pedido : listPedidoStatus) {
+			System.out.println("\nStatus: "+pedido.getStatus());
+			System.out.println("Data: "+pedido.getData());
+			System.out.println("Nome do cliente: "+pedido.getCliente().getNome());
+			System.out.println("CPF do cliente: "+pedido.getCliente().getCpf());
+				for (Produto produto : pedido.getProdutos()) {
+					System.out.println("ID do produto: "+produto.getId());
+					System.out.println("Nome do Produto: "+produto.getPratoBebida());
+					System.out.println("Preço unitario: "+produto.getPrecoUni());
+					System.out.println("Quantidade: "+produto.getQnt());
+					System.out.println("Preço final: "+produto.getPrecoFin());
+				}
+			System.out.println("Valor total: "+pedido.getVlr_total());
+		}
+	}
+	
 	public static void menuADM() {
 		int op = -1;
 		while(op != 0) {
@@ -97,16 +119,25 @@ public class ViewPrincipal {
 			op = tratamentoExceptionLerInt(op, "Opção: ");
 			switch(op) {
 			case 1:
-				System.out.println("\nPedidos Pendentes:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
 				break;
 			case 2:
-				System.out.println("\nPedidos Retirados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
+				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
 				break;
 			case 3:
-				System.out.println("\nPedidos Cancelados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
+				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
 				break;
 			case 4:
-					viewCliente.exibirCliente();
+					System.out.println("\n=== Clientes cadastrados ===");
+					for (Cliente cliente : viewCliente.exibirCliente()) {
+						System.out.println("\nNome: "+cliente.getNome());
+						System.out.println("CPF: "+cliente.getCpf());
+						System.out.println("RG: "+cliente.getRg());
+						System.out.println("Telefone do cliente: "+cliente.getTelefone());
+						System.out.println("Endereço: "+cliente.getEndereco());
+						System.out.println("Login: "+cliente.getLogin());
+						System.out.println("Senha:"+cliente.getSenha());
+					}
 				break;
 			case 0:
 				op = 0;
@@ -123,13 +154,3 @@ public class ViewPrincipal {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-

@@ -162,8 +162,8 @@ public class ViewCliente {
 		
 	}
 	
-	public static void exibirCliente() {
-		System.out.println(controllerCliente.listarCliente());
+	public static List<Cliente> exibirCliente() {
+		return controllerCliente.listarCliente();
 	}
 	
 }
