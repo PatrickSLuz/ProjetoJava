@@ -137,7 +137,7 @@ public class ViewCliente {
 			System.out.println("2 - Repetir ultimo pedido.");
 			System.out.println("3 - Alterar dados.");
 			System.out.println("4 - Ver meus dados");
-			System.out.println("0 - Voltar para o Menu.");
+			System.out.println("0 - Logout Cliente.");
 			escolha = viewPrincipal.tratamentoExceptionLerInt(escolha, "Opção: ");
 			switch (escolha) {
 			case 1:

@@ -64,9 +64,7 @@ public class Pedido {
 
 	public String verificaStatus() {
 		String status = this.status;
-		if(status.equals("A")) {
-			status = "Aberto";
-		}else if(status.equals("P")) {
+		if(status.equals("P")) {
 			status = "Pendente";
 		}else if(status.equals("E")) {
 			status = "Entrege";

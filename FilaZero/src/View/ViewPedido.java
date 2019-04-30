@@ -108,7 +108,6 @@ public class ViewPedido {
 				
 				pedido.setData(controllerPedido.pegarDataAtual());
 				pedido.setSenha(controllerPedido.incrementaSenha());
-				pedido.setStatus("A");
 				pedido.setCliente(cliente_logado);
 				vlr_total = exibirProdutosPedidoRetornaVlr(pedido);
 				pedido.setVlr_total(vlr_total);

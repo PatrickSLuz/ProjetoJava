@@ -80,22 +80,49 @@ public class ViewPrincipal {
 		if(login.equals(entrar) && senha.equals(entrar)) {
 			System.out.println("\n"+setor+ " Logado com Sucesso!");
 				if(setor.equals("ADM")) {
-					System.out.println(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+					menuADM();
 				}
 				else if (setor.equals("COZ")){
-					//viewCozinha
+					menuCOZ();
 				}
 		}else {
 			System.out.println("\n"+setor+" - Login ou Senha Incorreto!");
 		}
-		
-		
-		
 	}
 	
-
+	public static void menuADM() {
+		int op = -1;
+		while(op != 0) {
+			op = -1;
+			System.out.println("\n=== Visualizar Pedidos ===");
+			System.out.println("1 - Pedidos Pendentes (Pagos).");
+			System.out.println("2 - Pedidos Retirados (Cliente retirou).");
+			System.out.println("3 - Pedidos Cancelados (Cliente desistiu antes de pagar).");
+			System.out.println("0 - Logout ADM.");
+			op = tratamentoExceptionLerInt(op, "Opção: ");
+			switch(op) {
+			case 1:
+				System.out.println("\nPedidos Pendentes:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+				break;
+			case 2:
+				System.out.println("\nPedidos Retirados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
+				break;
+			case 3:
+				System.out.println("\nPedidos Cancelados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
+				break;
+			case 0:
+				op = 0;
+				break;
+			default:
+				System.out.println("\nOpção Inválida!\n");
+				break;
+			}
+		}
+	}
 	
-	
+	public static void menuCOZ() {
+		System.out.println("Pedidos Pendentes:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+	}
 	
 }
 
