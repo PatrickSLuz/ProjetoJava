@@ -4,13 +4,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-<<<<<<< HEAD
 import Model.Cliente;
 import Model.Pedido;
 import Model.Produto;
-=======
-import Controller.ControllerPedido;
->>>>>>> 622c794266dd2780db01d424d6963dc5be38b26c
 
 public class ViewPrincipal {
 	
@@ -26,6 +22,7 @@ public class ViewPrincipal {
 
 	}
 	
+	// Metodo para tratar a exceção de leitura de teclado para variveis do tipo int;
 	public static int tratamentoExceptionLerInt(int varLeitura, String msgPedirInfo) {
 		
 			while (varLeitura < 0) {
@@ -93,6 +90,7 @@ public class ViewPrincipal {
 		}
 	}
 	
+	// Metodo para printar os pedidos filtrando pelo seu STATUS;
 	public static void printarPedidoConformeStatus(List<Pedido> listPedidoStatus) {
 		for (Pedido pedido : listPedidoStatus) {
 			System.out.println("\nStatus: "+pedido.getStatus());
@@ -127,35 +125,25 @@ public class ViewPrincipal {
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
 				break;
 			case 2:
-<<<<<<< HEAD
+				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("F"));
+				break;
+			case 3:
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
 				break;
-			case 3:
+			case 4:
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
 				break;
-			case 4:
-					System.out.println("\n=== Clientes cadastrados ===");
-					for (Cliente cliente : viewCliente.exibirCliente()) {
-						System.out.println("\nNome: "+cliente.getNome());
-						System.out.println("CPF: "+cliente.getCpf());
-						System.out.println("RG: "+cliente.getRg());
-						System.out.println("Telefone do cliente: "+cliente.getTelefone());
-						System.out.println("Endereço: "+cliente.getEndereco());
-						System.out.println("Login: "+cliente.getLogin());
-						System.out.println("Senha:"+cliente.getSenha());
-					}
-=======
-				System.out.println("\nPedidos Finalizados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("F"));
-				break;
-			case 3:
-				System.out.println("\nPedidos Retirados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("E"));
-				break;
-			case 4:
-				System.out.println("\nPedidos Cancelados:\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
-				break;
 			case 5:
-				viewCliente.exibirCliente();
->>>>>>> 622c794266dd2780db01d424d6963dc5be38b26c
+				System.out.println("\n=== Clientes cadastrados ===");
+				for (Cliente cliente : viewCliente.exibirCliente()) {
+					System.out.println("\nNome: "+cliente.getNome());
+					System.out.println("CPF: "+cliente.getCpf());
+					System.out.println("RG: "+cliente.getRg());
+					System.out.println("Telefone do cliente: "+cliente.getTelefone());
+					System.out.println("Endereço: "+cliente.getEndereco());
+					System.out.println("Login: "+cliente.getLogin());
+					System.out.println("Senha:"+cliente.getSenha());
+				}
 				break;
 			case 0:
 				op = 0;
@@ -168,7 +156,8 @@ public class ViewPrincipal {
 	}
 	
 	public static void menuCOZ() {
-		System.out.println("\n=== Pedidos Pendentes ===\n"+viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
+		System.out.println("\n=== Pedidos Pendentes ===\n");
+		printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
 		System.out.println("\nDigite a senha do Pedido para finalizar a produção.");
 		System.out.print("Senha do Pedido: ");
 		int senha = ler.nextInt();

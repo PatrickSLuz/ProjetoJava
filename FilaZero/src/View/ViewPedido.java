@@ -1,13 +1,8 @@
 package View;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import Controller.ControllerPedido;
 import Controller.ControllerProduto;
@@ -61,6 +56,8 @@ public class ViewPedido {
 		controllerProduto.cadCardapio(produto);
 	}
 	
+	// Metodo para printar os produtos de um pedido (apos usuario dizer que não quer comprar mais);
+	// E, retorna o sub total do produto (quantidade x valor unitario) ;
 	public static double exibirProdutosPedidoRetornaVlr(Pedido pedido) {
 		int qnt;
 		double preco_uni, preco_fin, vlr_total = 0;
@@ -83,16 +80,17 @@ public class ViewPedido {
 		for (Produto produto : controllerProduto.exibirCardapio(produto)) {
 			System.out.println("ID: "+produto.getId());
 			System.out.println("Produto: "+produto.getPratoBebida());
-			System.out.println("Preço unitário: "+produto.getPrecoUni()+"\n");
+			System.out.println("Preço unitário: R$ "+produto.getPrecoUni()+"\n");
 		}
 	}	
 	public static void fazerPedido(Cliente cliente_logado) {
 		int comprarMais = -1;
 		double vlr_total = 0;
 		
-		pedido = new Pedido();
-		List<Produto> listProdutos = controllerProduto.retornaProdutos();
-		List<Produto> listProdutosDaLista = new ArrayList<Produto>();
+		// Cada vez que entrar nesse metodo de fazerPedido(),
+		pedido = new Pedido(); // Cria-se um novo Pedido, 
+		List<Produto> listProdutos = controllerProduto.retornaProdutos(); // Pega a lista dos produtos (Pratos e Bebidas) "Cadastrados";
+		List<Produto> listProdutosDoPedido = new ArrayList<Produto>(); // Cria uma nova lista para guardar os Produtos escolhidos no Pedido;
 		
 		while(comprarMais < 0 || comprarMais >= 1) {
 			comprarMais = -1;
@@ -103,6 +101,7 @@ public class ViewPedido {
 				retornoPedido = viewPrincipal.tratamentoExceptionLerInt(retornoPedido, "Digite o numero do Prato ou da Bebida: ");
 				if(retornoPedido < 1 || retornoPedido > 10) {
 					System.out.println("\nEscolha um Prato ou Bebida que existe no Cárdapio!\n");
+					retornoPedido = -1;
 				}
 			}			
 			System.out.print("Informe a quantidade: ");
@@ -113,14 +112,17 @@ public class ViewPedido {
 			System.out.println("1 - Sim.");
 			comprarMais = viewPrincipal.tratamentoExceptionLerInt(comprarMais, "Opção: ");
 			
-			// setando os produtos selecionados na lista antes de perguntar se o user quer para de comprar.
-			pedido.setProdutos(controllerPedido.criaListaComPratoSelecionado(retornoPedido, qnt, listProdutos, listProdutosDaLista));
+			// setando os produtos selecionados na lista antes de perguntar se o usuario quer para de comprar.
+			// Pois se fizer o setProdutos() após o usuario dizer que não mais comprar, o metodo iria armazenar
+			// somente o ultimo produto selecionado;
+			pedido.setProdutos(controllerPedido.criaListaComPratoSelecionado(retornoPedido, qnt, listProdutos, listProdutosDoPedido));
 			
 			if(comprarMais == 0) {
 				
 				pedido.setData(controllerPedido.pegarDataAtual());
 				pedido.setSenha(controllerPedido.incrementaSenha());
 				pedido.setCliente(cliente_logado);
+				// guarda o sub total do Produto na variavel e printa os Produtos selecionados no Pedido;
 				vlr_total = exibirProdutosPedidoRetornaVlr(pedido);
 				pedido.setVlr_total(vlr_total);
 				
@@ -148,8 +150,13 @@ public class ViewPedido {
 			System.out.println("\nO valor Total a ser Pago é: R$ "+valorTroco);
 	
 			System.out.println("\nSelecione a forma de Pagamento:");
+			// se escolher cartão o sistema diz que o Pedido foi finalizado e exibe a senha;
 			System.out.println("1 - Cartão.");
-			System.out.println("2 - Dinheiro.");
+			
+			// se escolher dinheiro, o sistema pergunta quanto foi pago e calculo o troco ou diz a quantia que ainda falta;
+			System.out.println("2 - Dinheiro."); 
+			
+			// se desistir do pedido, o sistema encerra e grava o pedido como cancelado;
 			System.out.println("0 - Desistir do Pedido.");
 			op = viewPrincipal.tratamentoExceptionLerInt(op, "Opção: ");
 	

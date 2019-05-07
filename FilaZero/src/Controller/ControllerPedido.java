@@ -11,20 +11,17 @@ import Model.Pedido;
 import Model.Produto;
 
 public class ControllerPedido {
-	
-	//CRIAR STATUS DE RETIRADO, QUNADO O PEDIDO ESTIVER FINALIZADO PELA COZINHA O STATUS FICA COMO ENTREGE, 
-	//SÓ MUDA PARA RETIRADO QUANDO O CLIENTE RETIRAR O PEDIDO.
-	//CRIAR UM METODO QUNADO O CLIENTE LOGAR PARA VERIFICAR SE EXISTE ALGUM PEDIDO DELE QUE FOI FINALIZADO, PEDIR A SENHA E RETIRAR O PEDID0 
-	//E SETAR O STATUS COMO RETIRADO.
-	
+		
 	List<Pedido> listPedido = new ArrayList<Pedido>();
 	
+	// Metodo para pegar a Data da maquina, com o formato escolhido;
 	public String pegarDataAtual() {
 	    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	    Date date = new Date();
 	    return dateFormat.format(date);
 	}
 	
+	// Metodo para retornar os pedidos filtrando pelo STATUS
 	public List<Pedido> retornaPedidosConformeStatus(String status){
 		List<Pedido> listPedidoConformeStatus = new ArrayList<>();
 		for (Pedido pedido : listPedido) {
@@ -39,7 +36,7 @@ public class ControllerPedido {
 		boolean senha_correta = false;
 		for (Pedido pedido : listPedido) {
 			if(pedido.getCliente().getCpf().equals(cliente.getCpf()) && pedido.getSenha() == senha) {
-				pedido.setStatus("E");
+				pedido.setStatus("E"); // "E" = Pedido Entrege/Retirado;
 				senha_correta = true;
 				break;
 			}
@@ -47,6 +44,8 @@ public class ControllerPedido {
 		return senha_correta;
 	}
 	
+	// Metodo para verificar se o cliente que se logou no sistema tem algum Pedido Finlizado pela Cozinha
+	// Para que possa retira-lo;
 	public List<Pedido> verificarPedidoParaRetirar(Cliente cliente){
 		List<Pedido> listPedidosParaRetirar = new ArrayList<>();
 		for (Pedido pedido : listPedido) {
@@ -57,6 +56,7 @@ public class ControllerPedido {
 		return listPedidosParaRetirar;
 	}
 	
+	// Metodo para mudar o Status do Pedido de "P"/Pendente (Pago) para "F"/Finalizado, para que o cliente possa retira-lo; 
 	public void attStatusFinalizacaoCozinha(int senha) {
 		for (Pedido pedido : listPedido) {
 			if(pedido.getSenha() == senha) {
@@ -66,7 +66,8 @@ public class ControllerPedido {
 		}
 	}
 	
-	
+	// Metodo para incrementar a Senha do Pedido;
+	// Ele faz 100 + a quantidade de Pedidos;
 	public int incrementaSenha() {
 		return 100 + listPedido.size();
 	}
@@ -79,6 +80,8 @@ public class ControllerPedido {
 		return listPedido;
 	}
 	
+	// Metodo para inserir os produtos selecionados no Pedido em uma lista e retornar essa lista;
+	// Junto ele grava a quantidade escolhida e faz os calculos de sub total do Produto (quantida x valor unitario);
 	public List<Produto> criaListaComPratoSelecionado(int id, int qnt, List<Produto> listProdutos, List<Produto> listProdutosDoPedido) {
 		double preco_fin;
 		for (int x = 0; x < listProdutos.size(); x++) {
@@ -106,9 +109,12 @@ public class ControllerPedido {
 		return troco;
 	}
 	
+	// Metodo para pegar o ultimo pedido realizado por um Cliente;
 	public Pedido ultimoPedido(Cliente cliente_logado) {
 		Pedido ult_pedido = null;
 		int tamanho_lista = listPedido.size();
+		// Laço de repetição Decrementando para pegar do ultimo Pedido gravado ao primeiro;
+		// Para trazer o Pedido mais recente do Cliente;
 		for (int i = tamanho_lista-1; i >= 0; i--) {
 			if(listPedido.get(i).getCliente().getCpf().equals(cliente_logado.getCpf())) {
 				ult_pedido = listPedido.get(i);
@@ -118,13 +124,3 @@ public class ControllerPedido {
 		return ult_pedido;
 	}	
 }
-
-
-
-
-
-
-
-
-
-

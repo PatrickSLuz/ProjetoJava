@@ -35,6 +35,7 @@ public class ControllerCliente {
 		
 	}
 	
+	// Metodo para validar se os CPF ou o Login ja estão gravados no sistema; Caso sim, não ira gravar repetido;
 	public boolean validarCad(String cpf, String login) {
 		boolean validar = false;
 		
