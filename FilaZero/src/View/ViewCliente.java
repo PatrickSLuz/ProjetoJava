@@ -141,13 +141,17 @@ public class ViewCliente {
 				viewPedido.fazerPedido(cliente_logado);
 				break;
 			case 2:
-				System.out.println(viewPedido.procurarPedidoCliente(cliente_logado));
-				System.out.print("Digite a senha do Pedido: ");
-				int senha = ler.nextInt();
-				if(viewPedido.verificarSenhaPedido(cliente_logado, senha)) {
-					System.out.println("Senha Correta!\nPedido Retirado!");
+				if(viewPedido.procurarPedidoCliente(cliente_logado).isEmpty()) {
+					System.out.println("\nNenhum pedido para ser retirado!");
 				}else {
-					System.out.println("Senha incorreta! Tente novamente.");
+					System.out.println(viewPedido.procurarPedidoCliente(cliente_logado));
+					System.out.print("Digite a senha do Pedido: ");
+					int senha = ler.nextInt();
+					if(viewPedido.verificarSenhaPedido(cliente_logado, senha)) {
+						System.out.println("Senha Correta!\nPedido Retirado!");
+					}else {
+						System.out.println("Senha incorreta! Tente novamente.");
+					}
 				}
 				break;
 			case 3:
@@ -173,14 +177,8 @@ public class ViewCliente {
 		return controllerCliente.listarCliente();
 	}
 	
+	public boolean verificaSeExisteCliente() {
+		return controllerCliente.verificaSeExisteCadastroCliente();
+	}
+	
 }
-
-
-
-
-
-
-
-
-
-

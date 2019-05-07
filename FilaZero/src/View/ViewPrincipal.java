@@ -94,6 +94,7 @@ public class ViewPrincipal {
 	public static void printarPedidoConformeStatus(List<Pedido> listPedidoStatus) {
 		for (Pedido pedido : listPedidoStatus) {
 			System.out.println("\nStatus: "+pedido.getStatus());
+			System.out.println("Senha do pedido: "+pedido.getSenha());
 			System.out.println("Data: "+pedido.getData());
 			System.out.println("Nome do cliente: "+pedido.getCliente().getNome());
 			System.out.println("CPF do cliente: "+pedido.getCliente().getCpf());
@@ -105,6 +106,19 @@ public class ViewPrincipal {
 					System.out.println("Preço final: "+produto.getPrecoFin());
 				}
 			System.out.println("Valor total: "+pedido.getVlr_total());
+		}
+	}
+	
+	public static void printarTodosCliente() {
+		System.out.println("\n=== Clientes cadastrados ===");
+		for (Cliente cliente : viewCliente.exibirCliente()) {
+				System.out.println("\nNome: "+cliente.getNome());
+				System.out.println("CPF: "+cliente.getCpf());
+				System.out.println("RG: "+cliente.getRg());
+				System.out.println("Telefone do cliente: "+cliente.getTelefone());
+				System.out.println("Endereço: "+cliente.getEndereco());
+				System.out.println("Login: "+cliente.getLogin());
+				System.out.println("Senha:"+cliente.getSenha());
 		}
 	}
 	
@@ -134,15 +148,10 @@ public class ViewPrincipal {
 				printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("C"));
 				break;
 			case 5:
-				System.out.println("\n=== Clientes cadastrados ===");
-				for (Cliente cliente : viewCliente.exibirCliente()) {
-					System.out.println("\nNome: "+cliente.getNome());
-					System.out.println("CPF: "+cliente.getCpf());
-					System.out.println("RG: "+cliente.getRg());
-					System.out.println("Telefone do cliente: "+cliente.getTelefone());
-					System.out.println("Endereço: "+cliente.getEndereco());
-					System.out.println("Login: "+cliente.getLogin());
-					System.out.println("Senha:"+cliente.getSenha());
+				if(viewCliente.verificaSeExisteCliente()) {
+					printarTodosCliente();
+				}else {
+					System.out.println("\nNão existe Cliente Cadastrado!");
 				}
 				break;
 			case 0:
@@ -156,12 +165,22 @@ public class ViewPrincipal {
 	}
 	
 	public static void menuCOZ() {
-		System.out.println("\n=== Pedidos Pendentes ===\n");
-		printarPedidoConformeStatus(viewPedido.controllerPedido.retornaPedidosConformeStatus("P"));
-		System.out.println("\nDigite a senha do Pedido para finalizar a produção.");
-		System.out.print("Senha do Pedido: ");
-		int senha = ler.nextInt();
-		viewPedido.attStatusPedidoCozinha(senha);
+		List<Pedido> listPedidosPendentes = viewPedido.controllerPedido.retornaPedidosConformeStatus("P");
+		if(listPedidosPendentes.isEmpty()) {
+			System.out.println("\nNão existem Pedidos Pendentes!");
+		}else {
+			System.out.println("\n=== Pedidos Pendentes ===");
+			printarPedidoConformeStatus(listPedidosPendentes);
+			System.out.println("\nDigite a senha do Pedido para finalizar a produção.");
+			System.out.print("Senha do Pedido: ");
+			int senha = ler.nextInt();
+			if(viewPedido.attStatusPedidoCozinha(senha)) {
+				System.out.println("Pedido Finalizado com Sucesso!\nAgora o cliente pode retirar esse Pedido!");
+			}else{
+				System.out.println("Verifique a Senha do Pedido.");
+			}
+		}
+		
 	}
 	
 }

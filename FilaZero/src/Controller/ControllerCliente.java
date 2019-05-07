@@ -13,6 +13,14 @@ public class ControllerCliente {
 		listCliente.add(cliente);
 	}
 	
+	public boolean verificaSeExisteCadastroCliente() {
+		boolean existeCLiente = false;
+			if(listCliente.size() > 0) {
+				existeCLiente = true;
+			}
+		return existeCLiente;
+	}
+	
 	public Cliente autenticarCliente(String login, String senha) {
 		Cliente logado = null;
 		for(int i =0; i < listCliente.size(); i++) {

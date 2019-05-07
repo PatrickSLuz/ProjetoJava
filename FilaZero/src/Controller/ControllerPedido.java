@@ -57,13 +57,16 @@ public class ControllerPedido {
 	}
 	
 	// Metodo para mudar o Status do Pedido de "P"/Pendente (Pago) para "F"/Finalizado, para que o cliente possa retira-lo; 
-	public void attStatusFinalizacaoCozinha(int senha) {
+	public boolean attStatusFinalizacaoCozinha(int senha) {
+		boolean atualizaouStatus = false;
 		for (Pedido pedido : listPedido) {
 			if(pedido.getSenha() == senha) {
 				pedido.setStatus("F");
+				atualizaouStatus = true;
 				break;
 			}
 		}
+		return atualizaouStatus;
 	}
 	
 	// Metodo para incrementar a Senha do Pedido;
@@ -80,17 +83,33 @@ public class ControllerPedido {
 		return listPedido;
 	}
 	
+	// Metodo para Calcular o sub total do produto;
+	public void calculaVlrFinProdutoPedido(Produto produto, int qnt) {
+		produto.setPrecoFin(qnt*produto.getPrecoUni());
+	}
+	
 	// Metodo para inserir os produtos selecionados no Pedido em uma lista e retornar essa lista;
 	// Junto ele grava a quantidade escolhida e faz os calculos de sub total do Produto (quantida x valor unitario);
 	public List<Produto> criaListaComPratoSelecionado(int id, int qnt, List<Produto> listProdutos, List<Produto> listProdutosDoPedido) {
-		double preco_fin;
-		for (int x = 0; x < listProdutos.size(); x++) {
-			if (listProdutos.get(x).getId() == id) {
-				listProdutos.get(x).setQnt(qnt);
-				preco_fin = qnt*listProdutos.get(x).getPrecoUni();
-				listProdutos.get(x).setPrecoFin(preco_fin);
-				listProdutosDoPedido.add(listProdutos.get(x));
-				break;
+		boolean produtoJaPedido = false;
+		
+		if(listProdutosDoPedido.size() > 0) {
+			for (int i = 0; i< listProdutosDoPedido.size();i++) {
+				if(listProdutosDoPedido.get(i).getId() == id) {
+					listProdutosDoPedido.get(i).setQnt(listProdutosDoPedido.get(i).getQnt() + qnt);
+					calculaVlrFinProdutoPedido(listProdutos.get(i), listProdutosDoPedido.get(i).getQnt());
+					produtoJaPedido = true;
+				}
+			}
+		}
+		if(!produtoJaPedido) {
+			for (int x = 0; x < listProdutos.size(); x++) {
+				if (listProdutos.get(x).getId() == id) {
+					listProdutos.get(x).setQnt(qnt);
+					calculaVlrFinProdutoPedido(listProdutos.get(x), qnt);
+					listProdutosDoPedido.add(listProdutos.get(x));
+					break;
+				}
 			}
 		}
 		return listProdutosDoPedido;

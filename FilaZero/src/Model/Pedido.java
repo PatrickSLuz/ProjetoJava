@@ -82,8 +82,7 @@ public class Pedido {
 				+ "\nCliente: "
 				+ "\n Nome: "+cliente.getNome()
 				+ "\n CPF: "+cliente.getCpf()
-				+ "\nProdutos: "+produtos.toString()
-				+ "\nSenha: "+this.senha;
+				+ "\nProdutos: "+produtos.toString();
 	}
 }
 

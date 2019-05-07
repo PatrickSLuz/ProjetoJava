@@ -78,7 +78,7 @@ public class ViewPedido {
 	
 	public static void printarCardapio() {
 		for (Produto produto : controllerProduto.exibirCardapio(produto)) {
-			System.out.println("ID: "+produto.getId());
+			System.out.println("Numero Prato/Bebida: "+produto.getId());
 			System.out.println("Produto: "+produto.getPratoBebida());
 			System.out.println("Preço unitário: R$ "+produto.getPrecoUni()+"\n");
 		}
@@ -209,8 +209,8 @@ public class ViewPedido {
 		return controllerPedido.verificarPedidoParaRetirar(cliente);
 	}
 	
-	public static void attStatusPedidoCozinha(int senha) {
-		controllerPedido.attStatusFinalizacaoCozinha(senha);
+	public boolean attStatusPedidoCozinha(int senha) {
+		return controllerPedido.attStatusFinalizacaoCozinha(senha);
 	}
 	
 }
