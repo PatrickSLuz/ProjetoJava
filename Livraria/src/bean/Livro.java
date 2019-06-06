@@ -1,18 +1,32 @@
 package bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Livro {
 	
-	private String codigo;
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	private Integer codigo;
+	@Column
 	private String nomeLivro;
+	@Column	
 	private String nomeAutor;
+	@Column
 	private double preco;
+	@Column
 	private int estoqueInicial;
+	@Column
 	private int numPaginas;
 	
-	public String getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 	public String getNomeLivro() {

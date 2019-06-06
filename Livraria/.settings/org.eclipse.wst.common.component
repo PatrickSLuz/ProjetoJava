@@ -2,7 +2,6 @@
     <wb-module deploy-name="Livraria">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/META-INF"/>
         <property name="context-root" value="Livraria"/>
         <property name="java-output-path" value="/Livraria/build/classes"/>
     </wb-module>

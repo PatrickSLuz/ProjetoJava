@@ -9,14 +9,27 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-<title>Página Inicial</title>
+<title>Login</title>
 </head>
 <h:body>
-    
-    <ui:include src="menu.xhtml" />
+
+   <ui:include src="menu.xhtml" />
 
 <div class="container">
-CORPO DA PÀGINA
+
+	<h:form>
+		<h:panelGrid columns="2">
+					
+			<h:outputLabel value="Login: "/>
+			<h:inputText id="login" value="#{clienteControllerBean.cliente.login}" />
+			
+			<h:outputLabel value="Senha: "/>
+			<h:inputSecret id="senha" value="#{clienteControllerBean.cliente.senha}" />
+			
+			<h:commandButton value="Salvar" action="#{clienteControllerBean.login}"></h:commandButton>
+		</h:panelGrid>		
+	</h:form>
+	
 </div>
 
 </h:body>

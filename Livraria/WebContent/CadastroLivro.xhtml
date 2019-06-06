@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+<title>Cadastro Livro</title>
+</head>
+<h:body>
+
+	<ui:include src="menu.xhtml" />
+
+<div class="container">
+	
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome do Livro: "/>
+			<h:inputText id="nomeLivro" value="#{livroControllerBean.livro.nomeLivro}" />
+			
+			<h:outputLabel value="Nome do Autor: "/>
+			<h:inputText id="nomeAutor" value="#{livroControllerBean.livro.nomeAutor}" />
+			
+			<h:outputLabel value="Preço: "/>
+			<h:inputText id="preco" value="#{livroControllerBean.livro.preco}" />
+			
+			<h:outputLabel value="Numero de Páginas: "/>
+			<h:inputText id="numPaginas" value="#{livroControllerBean.livro.numPaginas}" />
+			
+			<h:outputLabel value="Estoque Inicial: "/>
+			<h:inputText id="estoqueInicial" value="#{livroControllerBean.livro.estoqueInicial}" />
+						
+			<h:commandButton value="Salvar" action="#{livroControllerBean.salvarLivro}"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	
+</div>
+
+</h:body>
+</html>

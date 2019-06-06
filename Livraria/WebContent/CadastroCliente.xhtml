@@ -20,15 +20,21 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome: "/>
-			<h:inputText id="nome" value="" />
+			<h:inputText id="nome" value="#{clienteControllerBean.cliente.nome}" />
+			
+			<h:outputLabel value="CPF: "/>
+			<h:inputText id="cpf" value="#{clienteControllerBean.cliente.cpf}" />
+			
+			<h:outputLabel value="RG: "/>
+			<h:inputText id="rg" value="#{clienteControllerBean.cliente.rg}" />
 			
 			<h:outputLabel value="Login: "/>
-			<h:inputText id="login" value="" />
+			<h:inputText id="login" value="#{clienteControllerBean.cliente.login}" />
 			
 			<h:outputLabel value="Senha: "/>
-			<h:inputSecret id="senha" value="" />
+			<h:inputSecret id="senha" value="#{clienteControllerBean.cliente.senha}" />
 			
-			<h:commandButton value="Salvar"></h:commandButton>
+			<h:commandButton value="Salvar" action="#{clienteControllerBean.salvarCliente}"></h:commandButton>
 		</h:panelGrid>		
 	</h:form>
 	
