@@ -8,6 +8,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 <title>Insert title here</title>
 </head>
 <h:body>
@@ -19,35 +20,57 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     				<h:form><h:commandLink styleClass="nav-link" action="index.xhtml" value="Home"></h:commandLink></h:form>
     			</li>
 	    		
-	    		<li class="nav-item dropdown">
-		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          		Clientes
-		        	</a>
-		        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          		<h:form><h:commandLink styleClass="nav-link" action="GerenciaCliente.xhtml" value="Gerenciar Clientes"></h:commandLink></h:form>
-		          		<h:form><h:commandLink styleClass="nav-link" action="CadastroCliente.xhtml" value="Cadastrar Cliente"></h:commandLink></h:form>
-		        	</div>
-	      		</li>
-	      		
-	      		<li class="nav-item dropdown">
-		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          		Livros
-		        	</a>
-		        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          		<h:form><h:commandLink styleClass="nav-link" action="GerenciaLivro.xhtml" value="Gerenciar Livros"></h:commandLink></h:form>
-		          		<h:form><h:commandLink styleClass="nav-link" action="CadastroLivro.xhtml" value="Cadastrar Livro"></h:commandLink></h:form>
-		        	</div>
-	      		</li>
+	    		<h:form rendered="#{clienteControllerBean.tipo_usuario == 0}">
+	    			<li>
+	    				<h:commandLink styleClass="nav-link" action="CadastroCliente.xhtml" value="Cadastrar"></h:commandLink>
+	    			</li>
+	    		</h:form>
 	    		
-	      		<li class="nav-item">
-	      			<h:form><h:commandLink styleClass="nav-link" action="Login.xhtml" value="Login"></h:commandLink></h:form>
-	      		</li>	      		
+	    		<h:form rendered="#{clienteControllerBean.tipo_usuario == 2}">
+		    		<li class="nav-item dropdown">
+			        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          		Clientes
+			        	</a>
+			        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          		<h:commandLink styleClass="nav-link" action="GerenciaCliente.xhtml" value="Gerenciar Clientes"></h:commandLink>
+			          		<h:commandLink styleClass="nav-link" action="CadastroCliente.xhtml" value="Cadastrar Cliente"></h:commandLink>
+			        	</div>
+		      		</li>
+	      		</h:form>
+	      		
+	      		<h:form rendered="#{clienteControllerBean.tipo_usuario == 2}">
+		      		<li class="nav-item dropdown">
+			        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          		Livros
+			        	</a>
+			        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          		<h:commandLink styleClass="nav-link" action="GerenciaLivro.xhtml" value="Gerenciar Livros"></h:commandLink>
+			          		<h:commandLink styleClass="nav-link" action="CadastroLivro.xhtml" value="Cadastrar Livro"></h:commandLink>
+			        	</div>
+		      		</li>
+		      	</h:form>
+	    		
+	    		<h:form rendered="#{clienteControllerBean.tipo_usuario == 0}">
+		      		<li class="nav-item">
+		      			<h:commandLink styleClass="nav-link" action="Login.xhtml" value="Login"></h:commandLink>
+		      		</li>	      		
+	      		</h:form>
 	      		
     		</ul>
-		    <h:form styleClass="form-inline my-2 my-lg-0">
-		    	<h:inputText id="nome" styleClass="form-control mr-sm-2" />
-		    	<h:commandButton styleClass="btn btn-outline-success my-2 my-sm-0" value="Search"></h:commandButton>
+    		<ul class="navbar-nav mr-auto">
+		    <h:form rendered="#{clienteControllerBean.tipo_usuario >= 1}">
+		    	<li class="nav-item dropdown">
+		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          		<h:form rendered="#{clienteControllerBean.tipo_usuario == 2}"><h:outputText value="Administrador"/></h:form>
+		          		<h:form rendered="#{clienteControllerBean.tipo_usuario == 1}"><h:outputText value="#{clienteControllerBean.cliente.nome}"/></h:form>
+		        	</a>
+		        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          		<h:commandLink styleClass="nav-link" action="CadastroCliente.xhtml" value="Alterar Dados" rendered="#{clienteControllerBean.tipo_usuario == 1}"></h:commandLink>
+		          		<h:commandLink styleClass="nav-link" action="#{clienteControllerBean.logout}" value="Logout"></h:commandLink>
+		        	</div>
+	      		</li>
 		    </h:form>
+		    </ul>
 		</div>
 	</nav>
 

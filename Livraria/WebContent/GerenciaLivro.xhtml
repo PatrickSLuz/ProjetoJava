@@ -8,7 +8,6 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 <title>Gerenciar Livros</title>
 </head>
 <h:body>
@@ -18,7 +17,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <div class="container">
 
 	<h:form>
-		<h:dataTable value="#{livroControllerBean.listaLivro}" var="l" border="1" rendered="#{not empty livroControllerBean.listaLivro}">
+	
+		<h:outputLabel value="Pesquisar"/>
+		<h:inputText id="nome" value="#{livroControllerBean.livro.nomeLivro}" />
+		<h:commandButton value="Buscar" action="#{livroControllerBean.buscarLivro}"></h:commandButton>
+	
+		<h:dataTable value="#{livroControllerBean.listaLivros}" var="l" border="1" rendered="#{not empty livroControllerBean.listaLivros}">
 			<h:column >
 				<f:facet name="header">Nome Livro</f:facet>
 				<h:outputText value="#{l.nomeLivro}"></h:outputText>

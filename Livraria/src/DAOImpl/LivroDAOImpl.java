@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import DAO.DAO;
 import DAO.LivroDAO;
+import bean.Cliente;
 import bean.Livro;
 
 public class LivroDAOImpl extends DAO implements LivroDAO{
@@ -39,6 +40,23 @@ public class LivroDAOImpl extends DAO implements LivroDAO{
 		} finally {
 			em.close();
 		}		
+	}
+	
+	public List<Livro> buscarLivros(String nomeLivro){
+		System.out.println("Entrou em - LivroDAOImpl.buscarLivros()");
+		em = getEntityManager();
+		Query q = em.createQuery("select l from Livro l where l.nomeLivro like :pnomeLivro");
+		try {
+			System.out.println("Entrou no try em - LivroDAOImpl.buscarLivros()");
+			q.setParameter("pnomeLivro", "%"+nomeLivro+"%");
+		} catch(Exception e) {
+			System.out.println("Entrou no catch em - LivroDAOImpl.buscarLivros()");
+			e.printStackTrace();
+		} finally {
+			System.out.println("Entrou no finally em - LivroDAOImpl.buscarLivros()");
+			//em.close();
+		}
+		return q.getResultList();
 	}
 	
 	public List<Livro> listarLivros(){

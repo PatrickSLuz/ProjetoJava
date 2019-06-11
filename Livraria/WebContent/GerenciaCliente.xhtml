@@ -8,7 +8,6 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 <title>Gerenciar Clientes</title>
 </head>
 <h:body>
@@ -18,6 +17,14 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <div class="container">
 
 	<h:form>
+	
+		
+		<h:outputLabel value="Pesquisar"/>
+		<h:inputText id="nome" value="#{clienteControllerBean.cliente.nome}" />
+		<h:commandButton value="Buscar" action="#{clienteControllerBean.buscarCliente}"></h:commandButton>
+		
+			
+	
 		<h:dataTable value="#{clienteControllerBean.listaClientes}" var="c" border="1" rendered="#{not empty clienteControllerBean.listaClientes}">
 			<h:column >
 				<f:facet name="header">Nome</f:facet>
@@ -38,15 +45,14 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 				<f:facet name="header">Login</f:facet>
 				<h:outputText value="#{c.login}"></h:outputText>
 			</h:column>
-			
-		<!--	
+				
 			<h:column >
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink value="Excluir" action="#{clienteControllerBean.excluir}">
 					<f:param name="codigo" value="#{c.codigo}"/>
 				</h:commandLink>
 			</h:column>
-			
+			<!-- 
 			<h:column >
 				<f:facet name="header">Editar</f:facet>
 				<h:commandLink value="#{c.nome}" action="#{clienteControllerBean.editar}">

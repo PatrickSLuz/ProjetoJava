@@ -34,10 +34,35 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO{
 		}
 	}
 	
+	public void excluir(Integer codigo) {
+		em = getEntityManager();
+		em.getTransaction().begin();
+		Cliente cli = em.find(Cliente.class, codigo); // faz uma busca no banco pelo codigo;
+		em.remove(cli);
+		em.getTransaction().commit();
+	}
+	
 	public List<Cliente> listarClientes(){
 		em = getEntityManager();
 		em.getTransaction().begin();
 		Query q = em.createQuery("select object(c) from Cliente as c");
+		return q.getResultList();
+	}
+	
+	public List<Cliente> buscarClientes(String nome){
+		System.out.println("Entrou em - ClienteDAOImpl.buscarClientes()");
+		em = getEntityManager();
+		Query q = em.createQuery("select c from Cliente c where c.nome like :pnome");
+		try {
+			System.out.println("Entrou no try em - ClienteDAOImpl.buscarClientes()");
+			q.setParameter("pnome", "%"+nome+"%");
+		} catch(Exception e) {
+			System.out.println("Entrou no catch em - ClienteDAOImpl.buscarClientes()");
+			e.printStackTrace();
+		} finally {
+			System.out.println("Entrou no finally em - ClienteDAOImpl.buscarClientes()");
+			//em.close();
+		}
 		return q.getResultList();
 	}
 	
@@ -50,6 +75,11 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO{
 			q.setParameter("senha", cliente.getSenha());
 			cliente = (Cliente) q.getSingleResult();
 			System.out.println("Após a Query - ClienteDAOImpl.autenticar()");
+			System.out.println("Nome: "+ cliente.getNome()+
+					"RG: "+cliente.getRg()+
+					"CPF: "+cliente.getCpf()+
+					"Login: "+cliente.getLogin()+
+					"Senha: "+cliente.getSenha());
 		} catch (Exception e) {
 			System.out.println("Entrou no Catch - ClienteDAOImpl.autenticar()");
 			cliente = null;

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import DAOImpl.LivroDAOImpl;
@@ -8,10 +9,11 @@ import bean.Livro;
 public class LivroController {
 
 	private Livro livro;
-	private List<Livro> listaLivro;
+	private List<Livro> listaLivros = new ArrayList<Livro>();
 	private LivroDAOImpl livroDAOImpl = new LivroDAOImpl();
 	
 	public LivroController() {
+		listarLivros();
 		if(livro == null) {
 			livro = new Livro();
 		}
@@ -22,6 +24,15 @@ public class LivroController {
 		livro = new Livro();
 	}
 	
+	public void buscarLivro() {
+		System.out.println("Entrou em - LivroController.buscarLivro()");
+		this.listaLivros = livroDAOImpl.buscarLivros(livro.getNomeLivro());
+	}
+	
+	public void listarLivros() {
+		this.listaLivros = livroDAOImpl.listarLivros();
+	}
+	
 	public Livro getLivro() {
 		return livro;
 	}
@@ -29,12 +40,11 @@ public class LivroController {
 		this.livro = livro;
 	}
 
-	public List<Livro> getListaLivro() {
-		this.listaLivro = livroDAOImpl.listarLivros();
-		return listaLivro;
+	public List<Livro> getListaLivros() {
+		return listaLivros;
 	}
 
-	public void setListaLivro(List<Livro> listaLivro) {
-		this.listaLivro = listaLivro;
+	public void setListaLivros(List<Livro> listaLivros) {
+		this.listaLivros = listaLivros;
 	}
 }
