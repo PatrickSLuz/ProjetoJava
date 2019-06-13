@@ -16,22 +16,24 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <div class="container">
  
-	<h:form>
+	<h:form>	
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome: "/>
-			<h:inputText id="nome" value="#{clienteControllerBean.cliente.nome}" />
+			<h:inputText id="nome" value="#{clienteControllerBean.cliente.nome}" required="true" requiredMessage="O Nome é obrigatório" />
 			
-			<h:outputLabel value="CPF: "/>
-			<h:inputText id="cpf" value="#{clienteControllerBean.cliente.cpf}" />
+			<h:outputLabel value="CPF: " rendered="#{!clienteControllerBean.editaCliente}"/>
+			<h:inputText id="cpf" value="#{clienteControllerBean.cliente.cpf}" rendered="#{!clienteControllerBean.editaCliente}" 
+			required="true" requiredMessage="O CPF é obrigatório"/>
 			
-			<h:outputLabel value="RG: "/>
-			<h:inputText id="rg" value="#{clienteControllerBean.cliente.rg}" />
+			<h:outputLabel value="RG: " rendered="#{!clienteControllerBean.editaCliente}" />
+			<h:inputText id="rg" value="#{clienteControllerBean.cliente.rg}" rendered="#{!clienteControllerBean.editaCliente}" 
+			required="true" requiredMessage="O RG é obrigatório"/>
 			
 			<h:outputLabel value="Login: "/>
-			<h:inputText id="login" value="#{clienteControllerBean.cliente.login}" />
+			<h:inputText id="login" value="#{clienteControllerBean.cliente.login}" required="true" requiredMessage="O Login é obrigatório"/>
 			
 			<h:outputLabel value="Senha: "/>
-			<h:inputSecret id="senha" value="#{clienteControllerBean.cliente.senha}" />
+			<h:inputSecret id="senha" value="#{clienteControllerBean.cliente.senha}" required="true" requiredMessage="A Senha é obrigatório"/>
 			
 			<h:commandButton value="Salvar" action="#{clienteControllerBean.salvarCliente}"></h:commandButton>
 		</h:panelGrid>		

@@ -15,7 +15,11 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:include src="menu.xhtml" />
 
 <div class="container">
-CORPO DA PÀGINA
+	
+	<h:form rendered="#{clienteControllerBean.tipo_usuario == 0}"><h:outputText value="Seja Bem Vindo!"/></h:form>
+	<h:form rendered="#{clienteControllerBean.tipo_usuario == 2}"><h:outputText value="Seja Bem Vindo, Administrador"/></h:form>
+	<h:form rendered="#{clienteControllerBean.tipo_usuario == 1}"><h:outputText value="Seja Bem Vindo, #{clienteControllerBean.cliente.nome}"/></h:form>
+	
 </div>
 
 </h:body>

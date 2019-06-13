@@ -7,7 +7,6 @@ import javax.persistence.Query;
 
 import DAO.DAO;
 import DAO.LivroDAO;
-import bean.Cliente;
 import bean.Livro;
 
 public class LivroDAOImpl extends DAO implements LivroDAO{
@@ -40,6 +39,21 @@ public class LivroDAOImpl extends DAO implements LivroDAO{
 		} finally {
 			em.close();
 		}		
+	}
+	
+	public Livro editarLivro(Integer codigo) {
+		em = getEntityManager();
+		return em.find(Livro.class, codigo);
+	}
+	
+	public void excluirLivro(Integer codigo) {
+		System.out.println("Entrou em - LivroDAOImpl.excluirLivro()");
+		em = getEntityManager();
+		em.getTransaction().begin();
+		Livro li = em.find(Livro.class, codigo); // faz uma busca no banco pelo codigo;
+		em.remove(li);
+		em.getTransaction().commit();
+		em.close();
 	}
 	
 	public List<Livro> buscarLivros(String nomeLivro){

@@ -65,7 +65,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 		          		<h:form rendered="#{clienteControllerBean.tipo_usuario == 1}"><h:outputText value="#{clienteControllerBean.cliente.nome}"/></h:form>
 		        	</a>
 		        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          		<h:commandLink styleClass="nav-link" action="CadastroCliente.xhtml" value="Alterar Dados" rendered="#{clienteControllerBean.tipo_usuario == 1}"></h:commandLink>
+		          		<h:commandLink styleClass="nav-link" action="#{clienteControllerBean.editarCliente}" value="Alterar Dados" rendered="#{clienteControllerBean.tipo_usuario == 1}"></h:commandLink>
 		          		<h:commandLink styleClass="nav-link" action="#{clienteControllerBean.logout}" value="Logout"></h:commandLink>
 		        	</div>
 	      		</li>
@@ -73,6 +73,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 		    </ul>
 		</div>
 	</nav>
+
+	<h:messages
+    	errorClass="text-danger"
+	    infoClass="tect-info"
+    	warnClass="text-warning">
+	</h:messages>
 
 </h:body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

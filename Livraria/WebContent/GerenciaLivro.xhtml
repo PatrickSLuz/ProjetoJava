@@ -48,21 +48,20 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 				<h:outputText value="#{l.estoqueInicial}"></h:outputText>
 			</h:column>
 			
-		<!--	
 			<h:column >
 				<f:facet name="header">Excluir</f:facet>
-				<h:commandLink value="Excluir" action="#{clienteControllerBean.excluir}">
-					<f:param name="codigo" value="#{c.codigo}"/>
+				<h:commandLink value="Excluir" action="#{livroControllerBean.excluir}">
+					<f:param name="codigo" value="#{l.codigo}"/>
 				</h:commandLink>
 			</h:column>
 			
 			<h:column >
 				<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="#{c.nome}" action="#{clienteControllerBean.editar}">
-					<f:param name="codigo" value="#{c.codigo}"/>
+				<h:commandLink value="Editar" action="#{livroControllerBean.editarLivro}">
+					<f:param name="codigo" value="#{l.codigo}"/>
 				</h:commandLink>
 			</h:column>
-			 -->
+			
 		</h:dataTable>
 	</h:form>
 
