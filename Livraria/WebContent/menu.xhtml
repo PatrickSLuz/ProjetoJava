@@ -26,6 +26,12 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	    			</li>
 	    		</h:form>
 	    		
+	    		<h:form rendered="#{clienteControllerBean.tipo_usuario == 1}">
+	    			<li>
+	    				<h:commandLink styleClass="nav-link" action="GerenciaLivro.xhtml" value="Visualizar Livros"></h:commandLink>
+	    			</li>
+	    		</h:form>
+	    		
 	    		<h:form rendered="#{clienteControllerBean.tipo_usuario == 2}">
 		    		<li class="nav-item dropdown">
 			        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

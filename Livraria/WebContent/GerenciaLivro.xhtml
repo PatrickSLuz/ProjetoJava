@@ -18,7 +18,7 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 	<h:form>
 	
-		<h:outputLabel value="Pesquisar"/>
+		<h:outputLabel value="Pesquisar Nome "/>
 		<h:inputText id="nome" value="#{livroControllerBean.livro.nomeLivro}" />
 		<h:commandButton value="Buscar" action="#{livroControllerBean.buscarLivro}"></h:commandButton>
 	
@@ -48,14 +48,14 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 				<h:outputText value="#{l.estoqueInicial}"></h:outputText>
 			</h:column>
 			
-			<h:column >
+			<h:column rendered="#{clienteControllerBean.tipo_usuario == 2}">
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandLink value="Excluir" action="#{livroControllerBean.excluir}">
 					<f:param name="codigo" value="#{l.codigo}"/>
 				</h:commandLink>
 			</h:column>
 			
-			<h:column >
+			<h:column rendered="#{clienteControllerBean.tipo_usuario == 2}">
 				<f:facet name="header">Editar</f:facet>
 				<h:commandLink value="Editar" action="#{livroControllerBean.editarLivro}">
 					<f:param name="codigo" value="#{l.codigo}"/>
